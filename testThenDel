@@ -1,0 +1,12 @@
+# a=[{"a":"a","b":"b","c":"c"},{"a":"a","b":"b","c":"c"},{"a":"a","b":"b","c":"c"}]
+# list=[]
+# for i in a:
+#     for j in i:
+#         list.append(j)
+# print (list) #['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c']
+
+a=[{"a":"a","b":"b","c":"c"},{"a":"a","b":"b","c":"c"},{"a":"a","b":"b","c":"c"}]
+list=[]
+for i in a:
+    list.append(i)
+print (list)

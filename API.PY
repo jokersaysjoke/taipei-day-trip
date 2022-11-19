@@ -10,11 +10,13 @@ connection = mysql.connector.connect(
     charset="utf8"
 )
 
-app=Flask(__name__, static_folder="static", static_url_path="/")
+app=Flask(__name__)
 app.secret_key="99TSLA"
+app.config['JSON_AS_ASCII'] = False
+# app.config['DEBUG'] = True
 
 def pageKeyword(page,keyword):
-    cursor=connection.cursor()
+    cursor=connection.cursor(buffered=True , dictionary=True)
     if keyword == None:
         cursor.execute("select * from webpage limit 12 offset {}".format(page*12))
         data=cursor.fetchall()
@@ -22,23 +24,27 @@ def pageKeyword(page,keyword):
         nextPageData=cursor.fetchall()
         if len(nextPageData)!=0:
             nextPage=page+1
-            return {"nextPage":nextPage,"data":data}
+            list=[]
+            for i in data:
+                list.append(i)
+            return {"nextPage":nextPage,"data":list}
         elif len(nextPageData)==0:
             nextPage=None
-            return {"nextPage":nextPage,"data":data}
+            list=[]
+            for i in data:
+                list.append(i)
+            return {"nextPage":nextPage,"data":list}
     elif keyword !=None:
         cursor.execute("select * from webpage where category='{}' or name='%'+'{}'+'%' limit 12 offset {}".format(keyword,keyword,page*12))
         data=cursor.fetchall()
         cursor.execute("select * from webpage where category='{}' or name='%'+'{}'+'%' limit 12 offset {}".format(keyword,keyword,(page+1)*12))
         nextPageData=cursor.fetchall()
-        
         if len(nextPageData)!=0:
             nextPage=page+1
             return {"nextPage":nextPage,"data":data}
         elif len(nextPageData)==0:
             nextPage=None
             return {"nextPage":nextPage,"data":data}
-
 @app.route("/api/attractions") #取得景點資料列表
 def getAttrations():
     try:
@@ -58,7 +64,7 @@ def getAttrations():
 def getAttrationData(attractionID):
     try:
         if attractionID:
-            cursor=connection.cursor()
+            cursor=connection.cursor( buffered=True , dictionary=True)
             cursor.execute("select * from webpage where id= %s",(attractionID,))
             dataAttractionID=cursor.fetchall()
             if len(dataAttractionID)==0:
@@ -66,11 +72,12 @@ def getAttrationData(attractionID):
                         "error": True,
                         "message": "景點編號不正確"}, 400
             elif len(dataAttractionID)!=0:
-                return {"data":dataAttractionID}
+                for data in dataAttractionID:
+                    return {"data":data}
         return{
-                    "error": True,
-                    "message": "景點編號不正確"}, 400
-      
+                "error": True,
+                "message": "景點編號不正確"}, 400
+    
     except:
             return{
                     "error": True,
@@ -81,10 +88,14 @@ def categories():
     try:
         cursor=connection.cursor()
         cursor.execute("select distinct CATEGORY from webpage")
-        return {"data":cursor.fetchall()}
+        data=cursor.fetchall()
+        list=[]
+        for i in data:
+            for j in i:
+                list.append(j)
+        return {"data":list}
     except:
         return{
             "error": True,
             "message": "請按照情境提供對應的錯誤訊息"},500
-
 app.run(port=3000)
