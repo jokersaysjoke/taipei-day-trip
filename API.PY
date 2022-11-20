@@ -5,7 +5,7 @@ connection = mysql.connector.connect(
     host="localhost",
     port="3306",
     user="root",
-    password="", #輸入密碼
+    password="00000000", #輸入密碼
     database="TAIPEI",
     charset="utf8"
 )
@@ -16,7 +16,7 @@ app.config['JSON_AS_ASCII'] = False
 # app.config['DEBUG'] = True
 
 def pageKeyword(page,keyword):
-    cursor=connection.cursor(buffered=True , dictionary=True)
+    cursor=connection.cursor() #buffered=True , dictionary=True
     if keyword == None:
         cursor.execute("select * from webpage limit 12 offset {}".format(page*12))
         data=cursor.fetchall()
@@ -25,22 +25,48 @@ def pageKeyword(page,keyword):
         if len(nextPageData)!=0:
             nextPage=page+1
             list=[]
-            for i in data:
-                list.append(i)
-            return {"nextPage":nextPage,"data":list}
+            for i in data[0:12]:
+                dataDic={   
+                            "id":i[0],
+                            "name":i[1],
+                            "category":i[2],
+                            "description":i[3],
+                            "address":i[4],
+                            "transport":i[5],
+                            "mrt":i[6],
+                            "lat":i[7],
+                            "lng":i[8],
+                            "images":[i[9]]
+                        }
+                list.append(dataDic)
+            return{"nextPage":nextPage,"data":list}
+
         elif len(nextPageData)==0:
             nextPage=None
             list=[]
-            for i in data:
-                list.append(i)
-            return {"nextPage":nextPage,"data":list}
+            for i in data[0:12]:
+                dataDic={   
+                            "id":i[0],
+                            "name":i[1],
+                            "category":i[2],
+                            "description":i[3],
+                            "address":i[4],
+                            "transport":i[5],
+                            "mrt":i[6],
+                            "lat":i[7],
+                            "lng":i[8],
+                            "images":i[9]
+                        }
+                list.append(dataDic)
+            return{"nextPage":nextPage,"data":list}
     elif keyword !=None:
-        cursor.execute("select * from webpage where category='{}' or name='%'+'{}'+'%' limit 12 offset {}".format(keyword,keyword,page*12))
+        cursor.execute("select * from webpage where category='{}' or name like '{}' limit 12 offset {}".format(keyword,f'%{keyword}%',page*12))
         data=cursor.fetchall()
-        cursor.execute("select * from webpage where category='{}' or name='%'+'{}'+'%' limit 12 offset {}".format(keyword,keyword,(page+1)*12))
+        cursor.execute("select * from webpage where category='{}' or name like '{}' limit 12 offset {}".format(keyword,f'%{keyword}%',(page+1)*12))
         nextPageData=cursor.fetchall()
         if len(nextPageData)!=0:
             nextPage=page+1
+
             return {"nextPage":nextPage,"data":data}
         elif len(nextPageData)==0:
             nextPage=None
@@ -64,7 +90,7 @@ def getAttrations():
 def getAttrationData(attractionID):
     try:
         if attractionID:
-            cursor=connection.cursor( buffered=True , dictionary=True)
+            cursor=connection.cursor( )
             cursor.execute("select * from webpage where id= %s",(attractionID,))
             dataAttractionID=cursor.fetchall()
             if len(dataAttractionID)==0:
@@ -72,8 +98,20 @@ def getAttrationData(attractionID):
                         "error": True,
                         "message": "景點編號不正確"}, 400
             elif len(dataAttractionID)!=0:
-                for data in dataAttractionID:
-                    return {"data":data}
+                for i in dataAttractionID:
+                    return {"data":{
+                                        "id":i[0],
+                                        "name":i[1],
+                                        "category":i[2],
+                                        "description":i[3],
+                                        "address":i[4],
+                                        "transport":i[5],
+                                        "mrt":i[6],
+                                        "lat":i[7],
+                                        "lng":i[8],
+                                        "images":[i[9]]
+                                    }
+                            }
         return{
                 "error": True,
                 "message": "景點編號不正確"}, 400

@@ -9,9 +9,6 @@ connection = mysql.connector.connect(
 )
 
 cursor = connection.cursor() #cursor不要共用
-
-
-
 with open("taipei-attractions.json", mode="r", encoding="utf-8") as file:
     data=json.load(file)
     result=data["result"]["results"]
@@ -27,6 +24,8 @@ for i in range(len(result)):
         addHttps="https"+dropHttps[j]
         if addHttps[-1]=="g" or addHttps[-1] =="G":
             list.append(addHttps)
+    images=",".join(list)
+
     name=result[i]['name']
     category=result[i]['CAT']
     description=result[i]['description']
@@ -36,7 +35,6 @@ for i in range(len(result)):
     lat=result[i]['latitude']
     lng=result[i]['longitude']
     sql="insert into webpage(name,category,description,address,transport,mrt,lat,lng,images) value(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    val=(name,category,description,address,transport,mrt,lat,lng,json.dumps(list))
+    val=(name,category,description,address,transport,mrt,lat,lng,images)
     cursor.execute(sql,val)
     connection.commit()
-
