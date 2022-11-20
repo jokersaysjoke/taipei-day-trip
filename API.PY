@@ -55,10 +55,10 @@ def pageKeyword(page,keyword):
                             "mrt":i[6],
                             "lat":i[7],
                             "lng":i[8],
-                            "images":i[9]
+                            "images":[i[9]]
                         }
                 list.append(dataDic)
-            return{"nextPage":nextPage,"data":list}
+            return{"nextPage":None,"data":list}
     elif keyword !=None:
         cursor.execute("select * from webpage where category='{}' or name like '{}' limit 12 offset {}".format(keyword,f'%{keyword}%',page*12))
         data=cursor.fetchall()
@@ -66,11 +66,40 @@ def pageKeyword(page,keyword):
         nextPageData=cursor.fetchall()
         if len(nextPageData)!=0:
             nextPage=page+1
-
-            return {"nextPage":nextPage,"data":data}
+            list=[]
+            for i in data[0:12]:
+                dataDic={   
+                            "id":i[0],
+                            "name":i[1],
+                            "category":i[2],
+                            "description":i[3],
+                            "address":i[4],
+                            "transport":i[5],
+                            "mrt":i[6],
+                            "lat":i[7],
+                            "lng":i[8],
+                            "images":[i[9]]
+                        }
+                list.append(dataDic)
+            return{"nextPage":nextPage,"data":list}
         elif len(nextPageData)==0:
             nextPage=None
-            return {"nextPage":nextPage,"data":data}
+            list=[]
+            for i in data[0:12]:
+                dataDic={   
+                            "id":i[0],
+                            "name":i[1],
+                            "category":i[2],
+                            "description":i[3],
+                            "address":i[4],
+                            "transport":i[5],
+                            "mrt":i[6],
+                            "lat":i[7],
+                            "lng":i[8],
+                            "images":[i[9]]
+                        }
+                list.append(dataDic)
+            return{"nextPage":None,"data":list}
 @app.route("/api/attractions") #取得景點資料列表
 def getAttrations():
     try:
