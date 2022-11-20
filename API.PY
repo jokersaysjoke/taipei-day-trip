@@ -18,9 +18,9 @@ app.config['JSON_AS_ASCII'] = False
 def pageKeyword(page,keyword):
     cursor=connection.cursor() #buffered=True , dictionary=True
     if keyword == None:
-        cursor.execute("select * from webpage limit 12 offset {}".format(page*12))
+        cursor.execute("select * from webpage limit 12 offset %s",(page*12,))
         data=cursor.fetchall()
-        cursor.execute("select * from webpage limit 12 offset {}".format((page+1)*12))
+        cursor.execute("select * from webpage limit 12 offset %s",((page+1)*12,))
         nextPageData=cursor.fetchall()
         if len(nextPageData)!=0:
             nextPage=page+1
@@ -62,9 +62,9 @@ def pageKeyword(page,keyword):
                 list.append(dataDic)
             return{"nextPage":None,"data":list}
     elif keyword !=None:
-        cursor.execute("select * from webpage where category='{}' or name like '{}' limit 12 offset {}".format(keyword,f'%{keyword}%',page*12))
+        cursor.execute("select * from webpage where category=%s or name like %s limit 12 offset %s",(keyword,f'%{keyword}%',page*12))
         data=cursor.fetchall()
-        cursor.execute("select * from webpage where category='{}' or name like '{}' limit 12 offset {}".format(keyword,f'%{keyword}%',(page+1)*12))
+        cursor.execute("select * from webpage where category=%s or name like %s limit 12 offset %s",(keyword,f'%{keyword}%',(page+1)*12))
         nextPageData=cursor.fetchall()
         if len(nextPageData)!=0:
             nextPage=page+1
@@ -155,7 +155,7 @@ def getAttrationData(attractionID):
                     "error": True,
                     "message": "伺服器內部錯誤"}, 500
 
-@app.route("/api/categories") #取得井眼分類名稱列表
+@app.route("/api/categories") #取得景點分類名稱列表
 def categories():
     try:
         cursor=connection.cursor()
