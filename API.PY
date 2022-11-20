@@ -26,6 +26,7 @@ def pageKeyword(page,keyword):
             nextPage=page+1
             list=[]
             for i in data[0:12]:
+                images=i[9].split(",")
                 dataDic={   
                             "id":i[0],
                             "name":i[1],
@@ -36,7 +37,7 @@ def pageKeyword(page,keyword):
                             "mrt":i[6],
                             "lat":i[7],
                             "lng":i[8],
-                            "images":[i[9]]
+                            "images":images
                         }
                 list.append(dataDic)
             return{"nextPage":nextPage,"data":list}
@@ -45,6 +46,7 @@ def pageKeyword(page,keyword):
             nextPage=None
             list=[]
             for i in data[0:12]:
+                images=i[9].split(",")
                 dataDic={   
                             "id":i[0],
                             "name":i[1],
@@ -55,7 +57,7 @@ def pageKeyword(page,keyword):
                             "mrt":i[6],
                             "lat":i[7],
                             "lng":i[8],
-                            "images":[i[9]]
+                            "images":images
                         }
                 list.append(dataDic)
             return{"nextPage":None,"data":list}
@@ -68,6 +70,7 @@ def pageKeyword(page,keyword):
             nextPage=page+1
             list=[]
             for i in data[0:12]:
+                images=i[9].split(",")
                 dataDic={   
                             "id":i[0],
                             "name":i[1],
@@ -78,7 +81,7 @@ def pageKeyword(page,keyword):
                             "mrt":i[6],
                             "lat":i[7],
                             "lng":i[8],
-                            "images":[i[9]]
+                            "images":images
                         }
                 list.append(dataDic)
             return{"nextPage":nextPage,"data":list}
@@ -86,6 +89,7 @@ def pageKeyword(page,keyword):
             nextPage=None
             list=[]
             for i in data[0:12]:
+                images=i[9].split(",")
                 dataDic={   
                             "id":i[0],
                             "name":i[1],
@@ -96,7 +100,7 @@ def pageKeyword(page,keyword):
                             "mrt":i[6],
                             "lat":i[7],
                             "lng":i[8],
-                            "images":[i[9]]
+                            "images":images
                         }
                 list.append(dataDic)
             return{"nextPage":None,"data":list}
@@ -128,6 +132,7 @@ def getAttrationData(attractionID):
                         "message": "景點編號不正確"}, 400
             elif len(dataAttractionID)!=0:
                 for i in dataAttractionID:
+                    images=i[9].split(",")
                     return {"data":{
                                         "id":i[0],
                                         "name":i[1],
@@ -138,7 +143,7 @@ def getAttrationData(attractionID):
                                         "mrt":i[6],
                                         "lat":i[7],
                                         "lng":i[8],
-                                        "images":[i[9]]
+                                        "images":images
                                     }
                             }
         return{
