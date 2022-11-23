@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html onClick="location.reload();">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <title>台北一日遊</title>
+        <link rel="stylesheet" type="text/css" href="detstIndexHtml.css" />
+    </head>
+    <body  onClick="location.reload();">
+        <div id="header">
+            <div class="header-left">
+                台北一日遊
+            </div>
+            <div class="header-right">
+                <div class="header-rightItem">預定行程</div>
+                <div class="header-rightItem">登入/註冊</div>
+            </div>
+        </div>
+        <div id="welcome">
+            <img src="static/welcome.png" >
+            <div class="welcome-content">
+                <P>輕鬆享受台北一日悠閒</P>
+                <p>探索每個角落，體驗城市的深度旅遊行程</p>
+                <input type="text" placeholder="輸入景點名稱查詢">
+            </div>
+        </div>
+        <div id="main">
+            <!-- <div id=1 class="item ">
+                <img style="width: 100%" src="https://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000848.jpg">
+                <div class="name-background">
+                    <p class="name">哈哈</p>
+                </div>
+                <span class="mrt">台北車站</span>
+                <span class="cat">藝文館所</span>
+            </div> -->
+        </div>
+        <script >
+                    let main=document.getElementById("main");
+                    let fragment=document.createDocumentFragment();
+                    for (let i=0;i<12;i++){
+                        let mainDiv1=document.createElement("div");
+                        mainDiv1.className="item";
+
+                        let mainImage=document.createElement("img");
+                        mainImage.className="mainImage";
+                        mainImage.setAttribute('src','https://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000848.jpg')
+
+                        let nameBackground=document.createElement("div");
+                        nameBackground.className="name-background";
+                        let name=document.createElement("p");
+                        name.appendChild(document.createTextNode("平安鐘"));
+                        name.className="name";
+                        nameBackground.appendChild(name);
+                        nameAndBackground=fragment.appendChild(nameBackground);
+
+                        let spanLeft=document.createElement("span");
+                        spanLeft.appendChild(document.createTextNode("台北車站"));
+                        spanLeft.className="mrt";
+
+                        let spanRigth=document.createElement("span");
+                        spanRigth.appendChild(document.createTextNode("藝文館所"));
+                        spanRigth.className="cat";
+
+                        mainDiv1.append(mainImage,nameAndBackground,spanLeft,spanRigth);
+                        fragment.appendChild(mainDiv1);
+
+                    }
+                    main.appendChild(fragment);
+        </script>
+    </body>
+    <footer>
+        <div>COPYRIGHT © 2021 台北一日遊</div>
+    </footer>
+</html>

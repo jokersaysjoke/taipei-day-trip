@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html onClick="location.reload();">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <title>台北一日遊</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css')}}" />
+    </head>
+    <body  onClick="location.reload();">
+        <div id="header">
+            <div class="header-left">
+                台北一日遊
+            </div>
+            <div class="header-right">
+                <div class="header-rightItem">預定行程</div>
+                <div class="header-rightItem">登入/註冊</div>
+            </div>
+        </div>
+        <div id="welcome">
+            <img src="static/welcome.png" >
+        </div>
+        <div id="main">
+        </div>
+        <script src="static/mainAJAX.js"></script>
+    </body>
+    <footer>
+        <div>COPYRIGHT © 2021 台北一日遊</div>
+    </footer>
+</html>
