@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html onClick="location.reload();">
+<html > 
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <title>台北一日遊</title>
         <link rel="stylesheet" type="text/css" href="detstIndexHtml.css" />
+        <script src="https://kit.fontawesome.com/721f2dd150.js" crossorigin="anonymous"></script>
     </head>
-    <body  onClick="location.reload();">
+    <!-- onClick="location.reload();" -->
+    <body    onClick="location.reload();">
         <div id="header">
             <div class="header-left">
                 台北一日遊
@@ -16,14 +18,37 @@
                 <div class="header-rightItem">登入/註冊</div>
             </div>
         </div>
-        <div id="welcome">
-            <img src="static/welcome.png" >
-            <div class="welcome-content">
-                <P>輕鬆享受台北一日悠閒</P>
-                <p>探索每個角落，體驗城市的深度旅遊行程</p>
-                <input type="text" placeholder="輸入景點名稱查詢">
+        <div class="nulltop">
+            <div >
+                <div class="category">
+                    <div class="listCatagory">
+                    </div>
+                </div>
+    
             </div>
+            
         </div>
+        <!-- welcome -->
+        <div id="welcome">
+            <div class="onWelcomePng">
+                <div>
+                    <div style="font-size: 28px;">輕鬆享受台北一日悠閒</div>
+                    <br>
+                    <div>探索每個角落，體驗城市的深度旅遊行程</div>
+                    <br>
+                    <form class="categorySearch">
+                        <button>
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <input type="text" placeholder="輸入景點名稱查詢" name="search2" onclick="selectCatagory">
+                    </form>
+                </div>
+            </div>
+            <img src="static/welcome.png" >
+        </div>
+ 
+        
+        <!-- main -->
         <div id="main">
             <!-- <div id=1 class="item ">
                 <img style="width: 100%" src="https://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000848.jpg">
@@ -34,6 +59,9 @@
                 <span class="cat">藝文館所</span>
             </div> -->
         </div>
+        <footer>
+            <div>COPYRIGHT © 2021 台北一日遊</div>
+        </footer>
         <script >
                     let main=document.getElementById("main");
                     let fragment=document.createDocumentFragment();
@@ -41,9 +69,20 @@
                         let mainDiv1=document.createElement("div");
                         mainDiv1.className="item";
 
+                        let listCatagory=document.querySelector("listCatagory");
+                        let category=document.createElement("p");
+                        category.appendChild(document.createTextNode("分類啦"));
+                        categoryInList=listCatagory.appendChild(category); /*新的*/
+
+
+                        let mainImageBox=document.createElement("div");
+                        mainImageBox.className="mainImageBox";
                         let mainImage=document.createElement("img");
                         mainImage.className="mainImage";
                         mainImage.setAttribute('src','https://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000848.jpg')
+                        mainImageBox.appendChild(mainImage);
+                        mainImageInBox=fragment.appendChild(mainImageBox);
+
 
                         let nameBackground=document.createElement("div");
                         nameBackground.className="name-background";
@@ -61,14 +100,19 @@
                         spanRigth.appendChild(document.createTextNode("藝文館所"));
                         spanRigth.className="cat";
 
-                        mainDiv1.append(mainImage,nameAndBackground,spanLeft,spanRigth);
+                        mainDiv1.append(categoryInList,mainImageInBox,nameAndBackground,spanLeft,spanRigth);
                         fragment.appendChild(mainDiv1);
 
                     }
                     main.appendChild(fragment);
+                    
+
+                    // let categorySearch=document.querySelector("categorySearch");
+                    // function selectCatagory(){
+                    //     categorySearch.style.display-"blcok";
+                    // }
+
         </script>
     </body>
-    <footer>
-        <div>COPYRIGHT © 2021 台北一日遊</div>
-    </footer>
+ 
 </html>
