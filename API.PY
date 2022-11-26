@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request,redirect,render_template
 import mysql.connector
 
 connection = mysql.connector.connect(
@@ -14,6 +14,11 @@ app=Flask(__name__)
 app.secret_key="99TSLA"
 app.config['JSON_AS_ASCII'] = False
 # app.config['DEBUG'] = True
+
+@app.route("/")  
+def homePage():
+    return render_template("index.html")
+
 
 def pageKeyword(page,keyword):
     cursor=connection.cursor() #buffered=True , dictionary=True
