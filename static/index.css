@@ -50,7 +50,7 @@ body{
 .listCatagory{
     background-color: #ffffff;
     position: absolute;
-    margin-top: 2%;
+    margin-top: 20px;
     padding: 10px;
     width: 400px;
     display: none;
@@ -92,14 +92,15 @@ ul li{
 
 /* searchBar */
 .categorySearch{
+    width: 500px; /*60px+400px*/
     height: 30px;
 }
 .categorySearch>input[type=text] {
     padding: 10px;
+    width: 80%;
     font-size: 17px;
     border: 1px solid grey;
     float: left;
-    width: 400px;
     border-radius: 5px 0 0 5px;
     background: #f1f1f1;
     float: left;
@@ -107,8 +108,8 @@ ul li{
 
 }
 .categorySearch>button{
-    width: 60px;
     padding: 10px;
+    width: auto;
     background: #448899;
     color: white;
     font-size: 17px;
@@ -214,4 +215,8 @@ footer{
     .name-background{
         top: 195px;
     }
+    .categorySearch{
+        width: 90%;
+    }
+    
 }

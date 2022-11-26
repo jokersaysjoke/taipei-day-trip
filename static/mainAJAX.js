@@ -100,7 +100,7 @@ function fetchAttractionsAPI(){
 };
 // 展開景點分類
 document.onclick=function(e){
-    if(e.target.id != "listCatagory" & e.target.id !="selectCatagoryList" & e.target.className !="gategoryName")
+    if(e.target.id != "listCatagory" & e.target.id !="selectCatagoryList" )
     {
         listCatagory.style.display="none";
     }else{
