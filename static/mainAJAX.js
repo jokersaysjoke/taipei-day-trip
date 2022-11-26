@@ -9,7 +9,7 @@ let listCatagory=document.getElementById("listCatagory");
 fetchAttractionsAPI();
 //抓取API
 function fetchAttractionsAPI(){
-    isLoading=true;
+    isLoading=true; //正在載入
     if (page==null) 
     return page==null;
     if (keyword==null){
@@ -23,7 +23,6 @@ function fetchAttractionsAPI(){
     })
     .then(function(data){
             if(data.data){
-                page=data.nextPage;
                 for(let i=0; i< data.data.length; i++){
                     let mainDiv1=document.createElement("div");
                     mainDiv1.className="item";
@@ -55,6 +54,28 @@ function fetchAttractionsAPI(){
                     mainDiv1.append(mainImageInBox,nameAndBackground,spanLeft,spanRigth);
                     main.appendChild(fragment.appendChild(mainDiv1));
                 }
+            }
+            page=data.nextPage;
+            isLoading=false;
+            //intersectionObserver 
+            if(page!=null){
+                // IntersectionObserver可以帶入兩個參數callback 和 options
+                // callback可以帶入兩個參數
+                let options={
+                    root : null,
+                    rootMargin: "0px 0px 0px 0px",
+                    threshold: 0.8
+                }
+                let scroll=new IntersectionObserver((entries)=>{
+                    if(isLoading==false){
+                        if(entries[0].isIntersecting){
+                            isLoading==false
+                            fetchAttractionsAPI();
+                        }
+                    }
+                },options);
+                let footer=document.querySelector("footer");
+                scroll.observe(footer)
             }
             //fetch第二個API
             return fetch("http://127.0.0.1:3000/api/categories");
@@ -95,9 +116,9 @@ function searchCategory(){
     main.innerHTML=null
     page=0
     keyword=document.querySelector("input").value
-    console.log(keyword);
     fetchAttractionsAPI()
 };
+
 
 
 // window.addEventListener("scroll",renderNextPage);         
