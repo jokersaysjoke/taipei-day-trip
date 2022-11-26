@@ -31,7 +31,7 @@ for i in range(len(result)):
     description=result[i]['description']
     address=result[i]['address']
     transport=result[i]['direction']
-    mrt=result[i]['direction']
+    mrt=result[i]['MRT']
     lat=result[i]['latitude']
     lng=result[i]['longitude']
     sql="insert into webpage(name,category,description,address,transport,mrt,lat,lng,images) value(%s,%s,%s,%s,%s,%s,%s,%s,%s)"

@@ -29,22 +29,68 @@ body{
     margin-left: 20px;
     line-height: 54px;
 }
+.nullTop{
+    z-index: 1;
+    position: absolute;
+    height: 320px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nullTop>div{
+    width: 1200px;
+    left: 1%;
+}
+.category{
+    z-index: 99;
+    position: relative;
+    left: 1%;
+}
+.listCatagory{
+    background-color: #ffffff;
+    position: absolute;
+    margin-top: 2%;
+    padding: 10px;
+    width: 400px;
+    display: none;
+    grid-template-columns: repeat(3,1fr);
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px #AABBCC;
+}
+ul li{
+    list-style: none;
+    line-height: 33px;
+    cursor: pointer;
+}
+.onWelcomePng{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.onWelcomePng>div{
+    color: #ffffff;
+    width: 1200px;
+    height: auto;
+    position: relative;
+    left: 1%;
+}
 #welcome{
     height: 320px;
     margin: 0 auto;
     overflow: hidden;
+    position: relative;
+ 
 }
 #welcome>img{
     width: 100%;
-    overflow: hidden;
+    overflow: hidden; 
 }
-.welcome-content{
-    background-color: #757575;
-    color: #ffffff;
-    width: 1200px;
-    margin: 0 auto;
-    line-height: 40px;
-}
+
 /* searchBar */
 .categorySearch{
     height: 30px;
@@ -58,6 +104,7 @@ body{
     border-radius: 5px 0 0 5px;
     background: #f1f1f1;
     float: left;
+    cursor: pointer;
 
 }
 .categorySearch>button{
@@ -71,13 +118,7 @@ body{
     cursor: pointer;
     border-radius: 0 5px 5px 0;
 }
-.listCatagory{
-    width: 400px;
-    margin: 3% 0;
-    background-color: #202020;
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-}
+
 /* main */
 #main{
     background-color: gray;
@@ -123,7 +164,6 @@ body{
     margin: 4%;
 }
 
-
 .item{
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -142,6 +182,7 @@ footer{
     align-items: center;
 }
 
+
 @media (max-width:1200px){
     #header{
         width: 100%;
@@ -155,6 +196,7 @@ footer{
         height: auto;
         grid-template-columns: repeat(2,1fr);
     }
+    
     .mainImageBox{
         height: 220px;
     }

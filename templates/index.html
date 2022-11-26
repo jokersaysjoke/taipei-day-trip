@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html onClick="location.reload();">
+<html >
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
@@ -7,7 +7,8 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css')}}" />
         <script src="https://kit.fontawesome.com/721f2dd150.js" crossorigin="anonymous"></script>
     </head>
-    <body  onClick="location.reload();">
+    <!-- onClick="location.reload();" -->
+    <body>
         <div id="header">
             <div class="header-left">
                 台北一日遊
@@ -17,23 +18,36 @@
                 <div class="header-rightItem">登入/註冊</div>
             </div>
         </div>
+        <div class="nullTop">
+            <div >
+                <div class="category">
+                    <div style="font-size: 28px; color: #ffffff;">輕鬆享受台北一日悠閒</div>
+                    <br>
+                    <div style="color: #ffffff;">探索每個角落，體驗城市的深度旅遊行程</div>
+                    <br>
+                    <form class="categorySearch">
+                        <button type="button" onclick="searchCategory()">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <input id="selectCatagoryList" type="text" placeholder="輸入景點名稱查詢"   >
+                    </form>
+                    <ul id="listCatagory" class="listCatagory" ></ul>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- welcome -->
         <div id="welcome">
+            <div class="onWelcomePng">
+            </div>
             <img src="static/welcome.png" >
         </div>
-        <div class="welcome-content">
-            <div style="font-size: 28px;">輕鬆享受台北一日悠閒</div>
-            <div>探索每個角落，體驗城市的深度旅遊行程</div>
-            <form class="categorySearch">
-                <button>
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-                <input type="text" placeholder="輸入景點名稱查詢" name="search2" onclick="selectCatagory">
-            </form>
-        <div id="main">
-        </div>
+ 
+        <!-- main -->
+        <div id="main"></div>
         <script src="static/mainAJAX.js"></script>
     </body>
-    <footer>
+    <footer id="footer">
         <div>COPYRIGHT © 2021 台北一日遊</div>
     </footer>
 </html>
