@@ -175,4 +175,9 @@ def categories():
         return{
             "error": True,
             "message": "請按照情境提供對應的錯誤訊息"},500
+
+@app.route("/attraction/<int:attractionID>") #根據景點編號移駕html
+def turnToHtml(attractionID):
+    if attractionID:
+        return render_template("attraction.html")
 app.run(port=3000)
