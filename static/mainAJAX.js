@@ -13,9 +13,11 @@ function fetchAttractionsAPI(){
     if (page==null) 
     return page==null;
     if (keyword==null){
-        url="http://127.0.0.1:3000/api/attractions?page="+page
+        http://127.0.0.1:3000/
+        // http://13.112.252.173:3000/
+        url="http://13.112.252.173:3000/api/attractions?page="+page
     }else{
-        url="http://127.0.0.1:3000/api/attractions?page="+page+"&keyword="+keyword
+        url="http://13.112.252.173:3000/api/attractions?page="+page+"&keyword="+keyword
     }
     fetch(url)
     .then(function(response){
@@ -30,7 +32,7 @@ function fetchAttractionsAPI(){
                     let mainImageBox=document.createElement("div");
                     mainImageBox.className="mainImageBox";
                     mainImageBox.addEventListener("click",()=>{
-                        location.href="http://127.0.0.1:3000/attraction/"+data.data[i].id;
+                        location.href="http://13.112.252.173:3000/attraction/"+data.data[i].id;
                     })
                     let mainImage=document.createElement("img");
                     mainImage.className="mainImage";
@@ -81,7 +83,7 @@ function fetchAttractionsAPI(){
                 scroll.observe(footer)
             }
             //fetch第二個API，必須放在function裡才能work
-            return fetch("http://127.0.0.1:3000/api/categories");
+            return fetch("http://13.112.252.173:3000/api/categories");
         }
     )
     .then(function(response){

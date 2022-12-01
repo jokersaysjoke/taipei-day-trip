@@ -207,7 +207,7 @@ footer{
         width: 90%;
         justify-content: center;
     }
-    .welcome-lert{
+    .welcome-left{
         width: auto;
     }
     .welcome-right{
@@ -254,5 +254,26 @@ footer{
     }
     #article{
         margin-bottom: 50px;
+    }
+}
+@media(max-width:600px){
+    .header-rightItem{
+        margin-left: auto;
+        line-height: 54px;
+    }
+    #welcome{
+        width: 100%;
+    }
+    .welcome-left{
+        width: auto;
+    }
+    .welcome-imgbox{
+        width: 100%;
+    }
+    .welcome-right{
+        width: 95%;
+    }
+    #article{
+        width: 95%;
     }
 }
