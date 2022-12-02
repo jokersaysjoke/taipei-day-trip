@@ -10,12 +10,14 @@ fetchAttractionsAPI();
 //抓取API
 function fetchAttractionsAPI(){
     isLoading=true; //正在載入
+    // let urls="http://127.0.0.1:3000";
+    let urls="http://13.112.252.173:3000";
     if (page==null) 
     return page==null;
     if (keyword==null){
-        url="http://127.0.0.1:3000/api/attractions?page="+page
+        url=urls+"/api/attractions?page="+page
     }else{
-        url="http://127.0.0.1:3000/api/attractions?page="+page+"&keyword="+keyword
+        url=urls+"/api/attractions?page="+page+"&keyword="+keyword
     }
     fetch(url)
     .then(function(response){
@@ -29,6 +31,9 @@ function fetchAttractionsAPI(){
                     //產出圖片
                     let mainImageBox=document.createElement("div");
                     mainImageBox.className="mainImageBox";
+                    mainImageBox.addEventListener("click",()=>{
+                        location.href=urls+"/attraction/"+data.data[i].id;
+                    })
                     let mainImage=document.createElement("img");
                     mainImage.className="mainImage";
                     mainImage.setAttribute('src',data.data[i].images[0])
@@ -77,8 +82,8 @@ function fetchAttractionsAPI(){
                 let footer=document.querySelector("footer");
                 scroll.observe(footer)
             }
-            //fetch第二個API
-            return fetch("http://127.0.0.1:3000/api/categories");
+            //fetch第二個API，必須放在function裡才能work
+            return fetch(urls+"/api/categories");
         }
     )
     .then(function(response){
@@ -88,14 +93,12 @@ function fetchAttractionsAPI(){
         listCatagory.innerHTML=null
         for(let i=0;i<data.data.length;i++){
             let category=document.createElement("li");
-            category.className="gategoryName";
             category.addEventListener("click",()=>{
                 selectCatagoryList.value=data.data[i];
             });
             category.appendChild(document.createTextNode(data.data[i]));
             listCatagory.appendChild(fragment.appendChild(category));
         }
-
     });
 };
 // 展開景點分類
@@ -107,10 +110,6 @@ document.onclick=function(e){
         listCatagory.style.display="grid";
     }
 };
-// 載入nextPage
-function renderNextPage(){
-  
-};
 // keyword搜尋
 function searchCategory(){
     main.innerHTML=null
@@ -118,11 +117,3 @@ function searchCategory(){
     keyword=document.querySelector("input").value
     fetchAttractionsAPI()
 };
-
-
-
-// window.addEventListener("scroll",renderNextPage);         
-// window.pageYOffset 垂直移動量
-// window.innerHeight 回傳瀏覽器 (broswer) 視窗內的網頁內容高度。
-// document.body.clientHeight視窗的高度
-// document.body.offsetHeight
