@@ -5,8 +5,9 @@ let pathname=location.pathname;
 //載入頁面抓去API
 fetchAttracionApi();
 function fetchAttracionApi(){
-    // http://13.112.252.173:3000/
-    fetch("http://13.112.252.173:3000/api/"+pathname)
+    // let urls="http://127.0.0.1:3000";
+    let urls="http://13.112.252.173:3000";
+    fetch(urls+"/api/"+pathname)
         .then(function(response){
             return response.json();
         })
