@@ -182,8 +182,10 @@ input{
     border: 4px solid #ffffff;
     cursor: pointer;
 }
-hr{
-    margin: 50px auto
+.hr{
+    margin: 50px auto;
+    width: 1200px;
+    border: 1px solid #E8E8E8;
 }
 /*article*/
 #article{
@@ -248,8 +250,8 @@ footer{
     .welcome-right>h2{
         line-height: auto;
     }
-    hr{
-        width: 90%;
+    .hr{
+        width: 95%;
         margin: 50px auto;
     }
     #article{
