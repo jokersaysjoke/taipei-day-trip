@@ -1,4 +1,6 @@
-from flask import Flask, request,redirect,render_template
+from flask import *
+import jwt
+import time
 import mysql.connector
 
 connection = mysql.connector.connect(
@@ -180,4 +182,79 @@ def categories():
 def turnToHtml(attractionID):
     if attractionID:
         return render_template("attraction.html")
+
+@app.route("/api/user", methods=['POST']) #註冊一個新會員
+def signUp():
+    try:
+        if request.method=='POST':
+            name=request.json["name"]
+            email=request.json["email"]
+            password=request.json["password"]
+            cursor=connection.cursor()
+            cursor.execute("SELECT * FROM MEMBER WHERE EMAIL=%s",(email,))
+            record=cursor.fetchone()
+            if record:
+                return {"error": True},400
+            elif name==None or email==None or password==None:
+                return {"error": True},400
+            else:
+                cursor.execute("INSERT INTO MEMBER(NAME, EMAIL, PASSWORD) VALUES (%s,%s,%s)",(name, email, password))
+                connection.commit()
+                return {"ok": True},200
+        else:
+             return {"error": True},400
+    except:
+           return {
+            "error": True,
+            "message": "連線錯誤"},500
+
+@app.route("/api/user/auth", methods=['GET']) #取得當前登入會員資料
+def getInfo():
+    try:
+        if request.method=='GET':
+            token=request.cookies.get("user")
+            response=jwt.decode(token, app.secret_key, algorithms=["HS256"])
+            if response:
+                id=response['id']
+                name=response['name']
+                email=response['email']
+                return{"data":{'id':id,'name':name,'email':email}}
+            else:
+                return{"data":None}
+    except:
+            return{"data":None}
+
+@app.route("/api/user/auth", methods=['PUT']) #登入
+def signIn():
+    if request.method=='PUT':
+        email=request.json["email"]
+        password=request.json["password"]
+        cursor=connection.cursor()
+        cursor.execute("SELECT * FROM MEMBER WHERE EMAIL=%s", (email,))
+        record=cursor.fetchone()
+        if record:
+            if password==record[3]:
+                token=jwt.encode({
+                    'id':record[0],
+                    'name':record[1],
+                    'email':record[2],
+                    'expiretime':time.ctime()
+                }, app.secret_key, algorithm='HS256')
+                response=make_response({"ok":True},200)
+                response.set_cookie("user", token)
+                return response
+            else:
+                return{"error":True},400
+        else:
+            return{"error":True},400
+    else:
+        return{"error":True},400
+
+@app.route("/api/user/auth", methods=['DELETE']) #登出
+def signOut():
+    if request.method=="DELETE":
+        response=make_response({"ok":True},200) #賦予response可以進出applicaiton
+        response.delete_cookie('user')
+        return response
+
 app.run(port=3000)
