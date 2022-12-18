@@ -3,15 +3,6 @@ import jwt
 import time
 import mysql.connector
 
-# connection = mysql.connector.connect(
-#     host="localhost",
-#     port="3306",
-#     user="root",
-#     password="00000000", #輸入密碼
-#     database="TAIPEI",
-#     charset="utf8"
-# )
-
 dbconfig = {
     "user" : "root",
     "password" : "00000000",
@@ -25,12 +16,6 @@ connection_pool = mysql.connector.pooling.MySQLConnectionPool(
     pool_reset_session = True,
     **dbconfig
 )
-
-
-
-
-
-
 
 app=Flask(__name__)
 app.secret_key="99TSLA"

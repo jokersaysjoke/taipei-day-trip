@@ -10,8 +10,8 @@ fetchAttractionsAPI();
 //抓取API
 function fetchAttractionsAPI(){
     isLoading=true; //正在載入
-    let urls="http://127.0.0.1:3000";
-    // let urls="http://13.112.252.173:3000";
+    // let urls="http://127.0.0.1:3000";
+    let urls="http://13.112.252.173:3000";
     if (page==null) 
     return page==null;
     if (keyword==null){

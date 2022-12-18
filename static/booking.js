@@ -19,8 +19,8 @@ function delBookingInfo(){
 };
 // 取得API資訊
 function fetchBookingInfoAPI(){
-    let urls="http://127.0.0.1:3000";
-    // let urls="http://13.112.252.173:3000";
+    // let urls="http://127.0.0.1:3000";
+    let urls="http://13.112.252.173:3000";
 
     fetch(urls+"/api/booking")
     .then(function(response){
@@ -28,8 +28,9 @@ function fetchBookingInfoAPI(){
     })
     .then(function(data){
         let time="";
+        console.log(data);
         if(data.data){
-            if(data.time=="morning"){
+            if(data.data.time=="morning"){
                 time="早上 9 點到下午 4 點"
             }else{time="下午 4 點到晚上 9 點"}
             imgJPG.setAttribute('src', data.data.attraction.image);
@@ -47,8 +48,8 @@ fetchBookingInfoAPI();
 
 // 刪除API資訊
 function deleteAPI(){
-    let urls="http://127.0.0.1:3000";
-    // let urls="http://13.112.252.173:3000";
+    // let urls="http://127.0.0.1:3000";
+    let urls="http://13.112.252.173:3000";
 
     fetch(urls+"/api/booking", {
         method:"DELETE"

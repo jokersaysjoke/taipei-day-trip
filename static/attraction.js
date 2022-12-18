@@ -4,8 +4,8 @@ const pathname=location.pathname;
 //載入頁面抓去API
 fetchAttracionApi();
 function fetchAttracionApi(){
-    const urls="http://127.0.0.1:3000";
-    // const urls="http://13.112.252.173:3000";
+    // let urls="http://127.0.0.1:3000";
+    let urls="http://13.112.252.173:3000";
     fetch(urls+"/api/"+pathname)
         .then(function(response){
             return response.json();
@@ -92,7 +92,8 @@ const dateNull=document.querySelector(".dateNull");
 const timeNull=document.querySelector(".timeNull");
 let reservationTime="";
 function fetchBookingAPI(){
-    const urls="http://127.0.0.1:3000";
+    // let urls="http://127.0.0.1:3000";
+    let urls="http://13.112.252.173:3000";
     fetch(urls+"/api/user/auth")
     .then(function(response){
         return response.json();

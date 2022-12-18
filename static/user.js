@@ -1,5 +1,5 @@
-const urls="http://127.0.0.1:3000";
-// let urls="http://13.112.252.173:3000";
+// const urls="http://127.0.0.1:3000";
+let urls="http://13.112.252.173:3000";
 const newUserName=document.querySelector(".newUserName");
 const newEmail=document.querySelector(".newEmail");
 const newPassword=document.querySelector(".newPassword");
