@@ -3,14 +3,34 @@ import jwt
 import time
 import mysql.connector
 
-connection = mysql.connector.connect(
-    host="localhost",
-    port="3306",
-    user="root",
-    password="00000000", #輸入密碼
-    database="TAIPEI",
-    charset="utf8"
+# connection = mysql.connector.connect(
+#     host="localhost",
+#     port="3306",
+#     user="root",
+#     password="00000000", #輸入密碼
+#     database="TAIPEI",
+#     charset="utf8"
+# )
+
+dbconfig = {
+    "user" : "root",
+    "password" : "00000000",
+    "host" : "localhost",
+    "database" : "TAIPEI",
+}
+# create connection pool
+connection_pool = mysql.connector.pooling.MySQLConnectionPool(
+    pool_name = "wehelp_pool",
+    pool_size = 15,
+    pool_reset_session = True,
+    **dbconfig
 )
+
+
+
+
+
+
 
 app=Flask(__name__)
 app.secret_key="99TSLA"
@@ -23,94 +43,102 @@ def homePage():
 
 
 def pageKeyword(page,keyword):
-    cursor=connection.cursor() #buffered=True , dictionary=True
-    if keyword == None:
-        cursor.execute("select * from webpage limit 12 offset %s",(page*12,))
-        data=cursor.fetchall()
-        cursor.execute("select * from webpage limit 12 offset %s",((page+1)*12,))
-        nextPageData=cursor.fetchall()
-        if len(nextPageData)!=0:
-            nextPage=page+1
-            list=[]
-            for i in data[0:12]:
-                images=i[9].split(",")
-                dataDic={   
-                            "id":i[0],
-                            "name":i[1],
-                            "category":i[2],
-                            "description":i[3],
-                            "address":i[4],
-                            "transport":i[5],
-                            "mrt":i[6],
-                            "lat":i[7],
-                            "lng":i[8],
-                            "images":images
-                        }
-                list.append(dataDic)
-            return{"nextPage":nextPage,"data":list}
+    try:
+        connection_object = connection_pool.get_connection()
+        cursor =  connection_object.cursor()        
+        if keyword == None:
+            cursor.execute("select * from webpage limit 12 offset %s",(page*12,))
+            data=cursor.fetchall()
+            cursor.execute("select * from webpage limit 12 offset %s",((page+1)*12,))
+            nextPageData=cursor.fetchall()
+            if len(nextPageData)!=0:
+                nextPage=page+1
+                list=[]
+                for i in data[0:12]:
+                    images=i[9].split(",")
+                    dataDic={   
+                                "id":i[0],
+                                "name":i[1],
+                                "category":i[2],
+                                "description":i[3],
+                                "address":i[4],
+                                "transport":i[5],
+                                "mrt":i[6],
+                                "lat":i[7],
+                                "lng":i[8],
+                                "images":images
+                            }
+                    list.append(dataDic)
+                return{"nextPage":nextPage,"data":list}
 
-        elif len(nextPageData)==0:
-            nextPage=None
-            list=[]
-            for i in data[0:12]:
-                images=i[9].split(",")
-                dataDic={   
-                            "id":i[0],
-                            "name":i[1],
-                            "category":i[2],
-                            "description":i[3],
-                            "address":i[4],
-                            "transport":i[5],
-                            "mrt":i[6],
-                            "lat":i[7],
-                            "lng":i[8],
-                            "images":images
-                        }
-                list.append(dataDic)
-            return{"nextPage":None,"data":list}
-    elif keyword !=None:
-        cursor.execute("select * from webpage where category=%s or name like %s limit 12 offset %s",(keyword,f'%{keyword}%',page*12))
-        data=cursor.fetchall()
-        cursor.execute("select * from webpage where category=%s or name like %s limit 12 offset %s",(keyword,f'%{keyword}%',(page+1)*12))
-        nextPageData=cursor.fetchall()
-        if len(nextPageData)!=0:
-            nextPage=page+1
-            list=[]
-            for i in data[0:12]:
-                images=i[9].split(",")
-                dataDic={   
-                            "id":i[0],
-                            "name":i[1],
-                            "category":i[2],
-                            "description":i[3],
-                            "address":i[4],
-                            "transport":i[5],
-                            "mrt":i[6],
-                            "lat":i[7],
-                            "lng":i[8],
-                            "images":images
-                        }
-                list.append(dataDic)
-            return{"nextPage":nextPage,"data":list}
-        elif len(nextPageData)==0:
-            nextPage=None
-            list=[]
-            for i in data[0:12]:
-                images=i[9].split(",")
-                dataDic={   
-                            "id":i[0],
-                            "name":i[1],
-                            "category":i[2],
-                            "description":i[3],
-                            "address":i[4],
-                            "transport":i[5],
-                            "mrt":i[6],
-                            "lat":i[7],
-                            "lng":i[8],
-                            "images":images
-                        }
-                list.append(dataDic)
-            return{"nextPage":None,"data":list}
+            elif len(nextPageData)==0:
+                nextPage=None
+                list=[]
+                for i in data[0:12]:
+                    images=i[9].split(",")
+                    dataDic={   
+                                "id":i[0],
+                                "name":i[1],
+                                "category":i[2],
+                                "description":i[3],
+                                "address":i[4],
+                                "transport":i[5],
+                                "mrt":i[6],
+                                "lat":i[7],
+                                "lng":i[8],
+                                "images":images
+                            }
+                    list.append(dataDic)
+                return{"nextPage":None,"data":list}
+        elif keyword !=None:
+            cursor.execute("select * from webpage where category=%s or name like %s limit 12 offset %s",(keyword,f'%{keyword}%',page*12))
+            data=cursor.fetchall()
+            cursor.execute("select * from webpage where category=%s or name like %s limit 12 offset %s",(keyword,f'%{keyword}%',(page+1)*12))
+            nextPageData=cursor.fetchall()
+            if len(nextPageData)!=0:
+                nextPage=page+1
+                list=[]
+                for i in data[0:12]:
+                    images=i[9].split(",")
+                    dataDic={   
+                                "id":i[0],
+                                "name":i[1],
+                                "category":i[2],
+                                "description":i[3],
+                                "address":i[4],
+                                "transport":i[5],
+                                "mrt":i[6],
+                                "lat":i[7],
+                                "lng":i[8],
+                                "images":images
+                            }
+                    list.append(dataDic)
+                return{"nextPage":nextPage,"data":list}
+            elif len(nextPageData)==0:
+                nextPage=None
+                list=[]
+                for i in data[0:12]:
+                    images=i[9].split(",")
+                    dataDic={   
+                                "id":i[0],
+                                "name":i[1],
+                                "category":i[2],
+                                "description":i[3],
+                                "address":i[4],
+                                "transport":i[5],
+                                "mrt":i[6],
+                                "lat":i[7],
+                                "lng":i[8],
+                                "images":images
+                            }
+                    list.append(dataDic)
+                return{"nextPage":None,"data":list}
+    except:
+        print("Unexpected Error")
+    finally:
+        cursor.close()
+        connection_object.close()
+        
 @app.route("/api/attractions") #取得景點資料列表
 def getAttrations():
     try:
@@ -129,8 +157,9 @@ def getAttrations():
 @app.route("/api/attraction/<int:attractionID>") #根據景點編號取得景點資料
 def getAttrationData(attractionID):
     try:
+        connection_object = connection_pool.get_connection()
+        cursor =  connection_object.cursor()        
         if attractionID:
-            cursor=connection.cursor( )
             cursor.execute("select * from webpage where id= %s",(attractionID,))
             dataAttractionID=cursor.fetchall()
             if len(dataAttractionID)==0:
@@ -161,11 +190,15 @@ def getAttrationData(attractionID):
             return{
                     "error": True,
                     "message": "伺服器內部錯誤"}, 500
+    finally:
+        cursor.close()
+        connection_object.close()
 
 @app.route("/api/categories") #取得景點分類名稱列表
 def categories():
     try:
-        cursor=connection.cursor()
+        connection_object = connection_pool.get_connection()
+        cursor =  connection_object.cursor()        
         cursor.execute("select distinct CATEGORY from webpage")
         data=cursor.fetchall()
         list=[]
@@ -177,6 +210,9 @@ def categories():
         return{
             "error": True,
             "message": "請按照情境提供對應的錯誤訊息"},500
+    finally:
+        cursor.close()
+        connection_object.close()
 
 @app.route("/attraction/<int:attractionID>") #根據景點編號移駕html
 def turnToHtml(attractionID):
@@ -186,11 +222,12 @@ def turnToHtml(attractionID):
 @app.route("/api/user", methods=['POST']) #註冊一個新會員
 def signUp():
     try:
+        connection_object = connection_pool.get_connection()
+        cursor =  connection_object.cursor()        
         if request.method=='POST':
             name=request.json["name"]
             email=request.json["email"]
             password=request.json["password"]
-            cursor=connection.cursor()
             cursor.execute("SELECT * FROM MEMBER WHERE EMAIL=%s",(email,))
             record=cursor.fetchone()
             if record:
@@ -199,7 +236,7 @@ def signUp():
                 return {"error": True},400
             else:
                 cursor.execute("INSERT INTO MEMBER(NAME, EMAIL, PASSWORD) VALUES (%s,%s,%s)",(name, email, password))
-                connection.commit()
+                connection_object.commit()
                 return {"ok": True},200
         else:
              return {"error": True},400
@@ -207,6 +244,9 @@ def signUp():
            return {
             "error": True,
             "message": "連線錯誤"},500
+    finally:
+        cursor.close()
+        connection_object.close()
 
 @app.route("/api/user/auth", methods=['GET']) #取得當前登入會員資料
 def getInfo():
@@ -226,29 +266,38 @@ def getInfo():
 
 @app.route("/api/user/auth", methods=['PUT']) #登入
 def signIn():
-    if request.method=='PUT':
-        email=request.json["email"]
-        password=request.json["password"]
-        cursor=connection.cursor()
-        cursor.execute("SELECT * FROM MEMBER WHERE EMAIL=%s", (email,))
-        record=cursor.fetchone()
-        if record:
-            if password==record[3]:
-                token=jwt.encode({
-                    'id':record[0],
-                    'name':record[1],
-                    'email':record[2],
-                    'expiretime':time.ctime()
-                }, app.secret_key, algorithm='HS256')
-                response=make_response({"ok":True},200)
-                response.set_cookie("user", token)
-                return response
+    try:
+        connection_object = connection_pool.get_connection()
+        cursor =  connection_object.cursor()        
+        if request.method=='PUT':
+            email=request.json["email"]
+            password=request.json["password"]
+            cursor.execute("SELECT * FROM MEMBER WHERE EMAIL=%s", (email,))
+            record=cursor.fetchone()
+            if record:
+                if password==record[3]:
+                    token=jwt.encode({
+                        'id':record[0],
+                        'name':record[1],
+                        'email':record[2],
+                        'expiretime':time.ctime()
+                    }, app.secret_key, algorithm='HS256')
+                    response=make_response({"ok":True},200)
+                    response.set_cookie("user", token)
+                    return response
+                else:
+                    return{"error":True},400
             else:
                 return{"error":True},400
         else:
             return{"error":True},400
-    else:
-        return{"error":True},400
+    except:
+           return {
+            "error": True,
+            "message": "連線錯誤"},500
+    finally:
+        cursor.close()
+        connection_object.close()
 
 @app.route("/api/user/auth", methods=['DELETE']) #登出
 def signOut():
@@ -256,5 +305,113 @@ def signOut():
         response=make_response({"ok":True},200) #賦予response可以進出applicaiton
         response.delete_cookie('user')
         return response
+
+@app.route("/api/booking", methods=['GET']) #取得未確認下單的預定行程
+def get_booking_info():
+    try:
+        connection_object = connection_pool.get_connection()
+        cursor =  connection_object.cursor()      
+        token=request.cookies.get("user")
+        if token:
+            response=jwt.decode(token, app.secret_key, algorithms=["HS256"])
+            email=response["email"]
+            cursor.execute("select webpage.id, webpage.name, webpage.address, webpage.images, booking.date, booking.time, booking.price from webpage join booking on webpage.id=booking.attractionid where booking.email=%s" ,
+             (email,))
+            booking=cursor.fetchone()
+            if booking:
+                id=booking[0]
+                name=booking[1]
+                address=booking[2]
+                image=booking[3].split(",")[0]
+                date=booking[4]
+                time=booking[5]
+                price=booking[6]
+                return {"data":{
+                    "attraction":{
+                        "id":id,
+                        "name":name,
+                        "address":address,
+                        "image":image
+                    },
+                    "date":date,
+                    "time":time,
+                    "price":price
+                }},200
+            else:
+                return {"data":None}
+        else:
+            return {"error":True}, 403
+    except:
+         return {
+            "error": True,
+            "message": "連線錯誤"}, 500
+    finally:
+        cursor.close()
+        connection_object.close()
+
+@app.route("/api/booking", methods=['POST']) #建立新的預定行程
+def new_booking():
+    try:
+        connection_object = connection_pool.get_connection()
+        cursor =  connection_object.cursor()      
+        token=request.cookies.get("user")
+        if token:
+            response=jwt.decode(token, app.secret_key, algorithms=["HS256"])
+            if request.method=="POST":
+                email=response["email"]
+                attractionId=request.json["attractionId"]
+                date=request.json["date"]
+                time=request.json["time"]
+                price=request.json["price"]
+                cursor.execute("INSERT INTO BOOKING(EMAIL, ATTRACTIONID, DATE, TIME, PRICE) VALUES (%s,%s,%s,%s,%s)", (email, attractionId, date, time, price))
+                connection_object.commit()
+                return {"ok":True}
+            else:
+                return {"error":True},400 #建立失敗，輸入不正確或其他原因
+        else:
+            return {"error":True},403 #未登入系統，拒絕存取
+    except:
+        return {
+            "error": True,
+            "message": "伺服器內部錯誤"}, 500
+    finally:
+        cursor.close()
+        connection_object.close()
+
+@app.route("/api/booking", methods=['DELETE']) #刪除目前的預定行程
+def del_booking():
+    try:
+        connection_object = connection_pool.get_connection()
+        cursor =  connection_object.cursor()    
+        token=request.cookies.get("user")
+        if token:
+            response=jwt.decode(token, app.secret_key, algorithms=["HS256"])
+            email=response["email"]
+            cursor.execute("DELETE FROM BOOKING WHERE EMAIL=%s", (email,))
+            connection_object.commit()
+            # return {"ok":email}, 200
+            return {"ok":True}, 200
+        else:
+            return {
+                    "error": True,
+                    "message": "未登入系統，拒絕存取"
+                    }, 403
+    except:
+        return {
+                "error": True,
+                "message": "伺服器內部錯誤"}, 500
+    finally:
+        cursor.close()
+        connection_object.close()
+                    
+@app.route("/booking", methods=['GET']) #取得未確認下單的預定行程
+def booking_info():
+    token=request.cookies.get("user")
+    if token:
+        response=jwt.decode(token, app.secret_key, algorithms=["HS256"])
+        name=response['name']
+        return render_template("booking.html", user=name)
+    else:
+        return redirect("/")
 
 app.run(port=3000)

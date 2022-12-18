@@ -12,8 +12,8 @@
         <div id="headBox">
             <div id="header">
                 <div class="header-left" >
-                    <!-- <a href="http://127.0.0.1:3000/" style="color: #448899; text-decoration: none;">台北一日遊</a> -->
-                    <a href="http://13.112.252.173:3000/" style="color: #448899; text-decoration: none;">台北一日遊</a>
+                    <a href="http://127.0.0.1:3000/" style="color: #448899; text-decoration: none;">台北一日遊</a>
+                    <!-- <a href="http://13.112.252.173:3000/" style="color: #448899; text-decoration: none;">台北一日遊</a> -->
                 </div>
                 <div class="header-right">
                     <div class="header-rightItem">預定行程</div>
@@ -81,7 +81,8 @@
                     <div class="welcome-right-detail">
                         <p>訂購導覽行程</p>
                         <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
-                        <p>選擇日期：<input placeholder="yyyy/mm/dd" type="date" style="border: none; width: 199px; height: 33px"></p>
+                        <p>選擇日期：<input class="reservationDate" placeholder="yyyy/mm/dd" type="date" style="border: none; width: 199px; height: 33px"></p>
+                        <p class="dateNull"></p>
                         <p style="display: flex; align-items: center;" >
                             選擇時間：
                             <span><button class="amButton" ></button></span>
@@ -89,8 +90,9 @@
                             <span><button class="pmButton" ></button></span>
                             &nbsp;下半天&nbsp;&nbsp;
                         </p>
-                        <p>導覽費用：<span class="price">新台幣 2000 元</span></p>
-                        <button type="submit" >開始預約行程</button>
+                        <p class="timeNull"></p>
+                        <p>導覽費用：新台幣&nbsp;<span class="price">2000</span>&nbsp;元</p>
+                        <button type="submit" class="reservationButton" >開始預約行程</button>
                     </div>
                 </div>
             </div>

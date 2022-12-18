@@ -1,10 +1,10 @@
-// let urls="http://127.0.0.1:3000";
-let urls="http://13.112.252.173:3000";
-let newUserName=document.querySelector(".newUserName");
-let newEmail=document.querySelector(".newEmail");
-let newPassword=document.querySelector(".newPassword");
-let signMessage=document.querySelector(".signMessage");
-let registerMessage=document.querySelector(".registerMessage");
+const urls="http://127.0.0.1:3000";
+// let urls="http://13.112.252.173:3000";
+const newUserName=document.querySelector(".newUserName");
+const newEmail=document.querySelector(".newEmail");
+const newPassword=document.querySelector(".newPassword");
+const signMessage=document.querySelector(".signMessage");
+const registerMessage=document.querySelector(".registerMessage");
 // 註冊
 function signUp(){
     if(newUserName.value=='' || newEmail.value=='' || newPassword.value==''){
@@ -38,8 +38,8 @@ function signUp(){
     }
 };
 // 登入
-let registerBoxEmail=document.querySelector(".registerBoxEmail")
-let registerBoxPass=document.querySelector(".registerBoxPass")
+const registerBoxEmail=document.querySelector(".registerBoxEmail")
+const registerBoxPass=document.querySelector(".registerBoxPass")
 function singIn(){
     fetch(urls+"/api/user/auth",{
         method:"PUT",
@@ -56,8 +56,7 @@ function singIn(){
         if(data.ok){
             signMessage.style.color="green";
             signMessage.innerHTML="登入成功";
-            setTimeout("console.log('1')",1000)
-            setTimeout("location.reload()",2000)
+            setTimeout("location.reload()",500)
                
         }
         else if(data.error){
@@ -69,7 +68,7 @@ function singIn(){
     })
 };
 //登出
-let headerRightItem=document.querySelector("#headerRightItem")
+const headerRightItem=document.querySelector("#headerRightItem")
 function logOut(){
     fetch(urls+"/api/user/auth",{
         method:"DELETE"
@@ -80,11 +79,12 @@ function logOut(){
     .then(function(data){
         if(data.ok){
             headerRightItem.innerHTML="登入/註冊"
+            setTimeout("location.reload()",500)
             headerRightItem.addEventListener('click',(openLogin))
         }
     })
 };
-
+const reservation=document.querySelector(".header-rightItem")
 // 會員中
 function member(){
     fetch(urls+"/api/user/auth")
@@ -93,34 +93,33 @@ function member(){
     })
     .then(function(data){
         if(data.data != null){
+            //已登入
             headerRightItem.innerHTML="登出系統";
             headerRightItem.addEventListener('click',logOut);
-           
+            reservation.innerHTML='<a href='+urls+'/booking>預定行程</a>';
         }
         else{
+            //未登入
             headerRightItem.innerHTML="登入/註冊";
             headerRightItem.addEventListener('click',(openLogin));
+            reservation.addEventListener('click',(openLogin));
         }
     })
 };
 member();
 
 // 打開、關閉註冊視窗
-let loginWindow=document.querySelector("#login");
-let registerWindow=document.querySelector("#register");
-let registerWindowBackground=document.querySelector("#loginWindowBackground");
+const loginWindow=document.querySelector("#login");
+const registerWindow=document.querySelector("#register");
+const registerWindowBackground=document.querySelector("#loginWindowBackground");
 function openLogin(){
     loginWindow.style.display="block";
     registerWindowBackground.style.display="block";
 };
 
-let registerCloser=document.querySelector(".registerCloser");
+const registerCloser=document.querySelector(".registerCloser");
 function closeRegister(){
-    // loginWindow.style.display="none";
-    // registerWindow.style.display="none";
-    // registerWindowBackground.style.display="none";
     location.reload();
-
 };
 function register(){
     registerWindow.style.display="block";
