@@ -1,6 +1,12 @@
 body{
     margin: 0;
 }
+a{
+    text-decoration: none;
+}
+button{
+    cursor: pointer;
+}
 #headBox{
     position: fixed;
     top: 0;
@@ -33,10 +39,14 @@ body{
     align-items: center;
     margin: 1%;
     flex: 50%;
+    color: #666;
 }
 .header-rightItem{
     margin-left: 20px;
-    line-height: 54px;
+    cursor: pointer;
+}
+.header-rightItem>a{
+    color: #666;
 }
 .fakeHeadBox{
     height: 54px;
@@ -279,13 +289,16 @@ input{
     cursor: pointer;
 }
 .pmButton{
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     width: 22px;
     height: 22px;
     border-radius: 15px;
     margin-left: 5px;
     border: 4px solid #ffffff;
     cursor: pointer;
+}
+.dateNull, .timeNull{
+    color: red;
 }
 .hr{
     margin: 50px auto;
@@ -309,7 +322,7 @@ footer{
 }
 @media(max-width:1200px){
     #header{
-        width: 90%;
+        width: 100%;
     }
     #welcome{
         width: 90%;

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <title>台北一日遊</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='booking.css')}}" />
+        <script src="https://kit.fontawesome.com/721f2dd150.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="headBox">
+            <div id="header">
+                <div class="header-left" >
+                    <!-- <a href="http://127.0.0.1:3000/" style="color: #448899; text-decoration: none;">台北一日遊</a> -->
+                    <a href="http://13.112.252.173:3000/" style="color: #448899; text-decoration: none;">台北一日遊</a>
+                </div>
+                <div class="header-right">
+                    <div class="header-rightItem">預定行程</div>
+                    <!-- <div class="header-rightItem">登入/註冊</div> -->
+                    <div id="headerRightItem" class="header-rightItem" style="cursor: pointer" ></div>
+                </div>
+            </div>
+        </div>
+        <div class="fakeHeadBox"></div>
+        <!-- 登入 -->
+        <div id="login">
+            <div class="registerBackground"></div>
+            <div class="registerTitle">登入會員帳號</div>
+            <div class="registerCloser" onclick="closeRegister()"><i class="fa-solid fa-xmark"></i></div>
+            <div class="closeRegister"></div>
+            <form class="registerBox">
+                <input class="registerBoxEmail" placeholder="輸入電子信箱" name="email" type="text" required>
+                <input class="registerBoxPass" placeholder="輸入密碼" name="password" type="password" required>
+            </form>
+            <input class="loginButton" type="submit" value="登入帳戶" onclick="singIn()">
+            <div class="signMessage"></div>
+            <div class="registerFooter">
+                <p>還沒有帳戶？</p>
+                <p style="cursor: pointer" onclick="register()">點此註冊</p>
+            </div>
+        </div>
+        <!-- 註冊 -->
+        <div id="register">
+            <div class="registerBackground"></div>
+            <div class="registerTitle">註冊會員帳號</div>
+            <div class="registerCloser" onclick="closeRegister()"><i class="fa-solid fa-xmark"></i></div>
+            <div class="closeRegister"></div>
+            <form class="registerBox">
+                <input class="newUserName" placeholder="輸入姓名" name="name" type="text" required>
+                <input class="newEmail" placeholder="輸入電子信箱" name="email" type="text" required>
+                <input class="newPassword" placeholder="輸入密碼" name="password" type="password" required>
+                <!-- <button class="loginButton">註冊新帳戶</button> -->
+            </form>
+            <input class="loginButton" type="submit" value="註冊新帳戶" onclick="signUp()">
+            <div class="registerMessage"></div>
+            <div class="registerFooter">
+                <p>已經有帳戶了？</p>
+                <p style="cursor: pointer" onclick="login()">點此登入</p>
+            </div>
+        </div>
+        <!-- 天黑 -->
+        <div id="loginWindowBackground" onclick="closeRegister()"></div>
+        <!-- 訂單資訊 -->
+        <div class="fakeNav">
+            <div class="nav">
+                <br>
+                <div class="hi">您好，{{user}}，待預訂的行程如下：</div>
+                <br>
+                <div class="noInfo"></div>
+                <br>
+            </div>
+        </div>
+        <div id="fakeBody">
+            <div class="main">
+                <div class="mainbox">
+                    <div class="bookingInfoBox">
+                        <div class="imgBox">
+                            <div class="img">
+                                <img class="imgJPG">
+                            </div>
+                        </div>
+                        <div class="bookingInfo">
+                            <div class="attractionTitle">台北一日遊：<span class="attractionName"></span></div>
+                            <p>日期：&nbsp;<span class="attractionDate"></span></p>
+                            <p>時間：&nbsp;<span class="attractionTime"></span></p>
+                            <p>費用：&nbsp;<span>新台幣&nbsp;<span class="attractionPrice"></span>&nbsp;元</span></p>
+                            <p>地點：&nbsp;<span class="attractionAddress"></span></p>
+                        </div>
+                        <div class="deleteInfo" onclick="deleteAPI()"><i class="fa-regular fa-trash-can"></i></div> <!--垃圾桶-->
+                    </div>
+                </div>
+            </div>
+            <div class="hr"></div>
+            <!-- 使用者資訊 -->
+            <div class="main">
+                <div class="mainbox">
+                    <div>您的聯絡資訊</div>
+                    <p>聯絡姓名：<input type="text"></p>
+                    <p>連絡信箱：<input type="text"></p>
+                    <p>手機號碼：<input type="text"></p>
+                    <p>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</p>
+                </div>
+            </div>
+            <div class="hr"></div>
+            <!-- 信用卡資訊 -->        
+            <div class="main">
+                <div class="mainbox">
+                    <div>信用卡付款資訊</div>
+                    <p>卡片號碼：<input type="password"></p>
+                    <p>過期時間：<input type="month"></p>
+                    <p>驗證密碼：<input type="text"></p>
+                </div>
+            </div>
+            <div class="hr"></div>
+            <div class="mainbox">
+                <div class="bottom">
+                    <div class="total">總價：新台幣&nbsp;<span class="attractionPrice"></span>&nbsp;元</div>
+                    <button type="submit">確認訂購並付款</button>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+            <div>COPYRIGHT © 2021 台北一日遊</div>
+        </footer>
+        <script src="/static/user.js"></script>
+        <script src="/static/booking.js"></script>
+    </body>
+</html>

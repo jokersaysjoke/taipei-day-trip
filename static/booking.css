@@ -4,12 +4,21 @@ body{
 a{
     text-decoration: none;
 }
+#headBox{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: #ffffff;
+}
 #header{
     background-color: #ffffff;
     width: 1200px;
     height: 54px;
     display: flex;
     margin: 0 auto;
+    
 }
 .header-left{
     color: #448899;
@@ -19,6 +28,7 @@ a{
     margin: 1%;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 .header-right{
     display: flex;
@@ -34,6 +44,9 @@ a{
 }
 .header-rightItem>a{
     color: #666;
+}
+.fakeHeadBox{
+    height: 54px;
 }
 .signMessage{
     font-weight: bold;
@@ -140,216 +153,169 @@ a{
     justify-content: center;
     align-items: center;
 }
-.nullTop{
-    z-index: 1;
-    position: absolute;
-    height: 320px;
-    left: 0;
-    right: 0;
+/* 圖片+資訊 */
+.fakeNav{
+    background-color: #ffffff;
+    width: 100%;
+}
+.nav{
+    width: 1000px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    position: relative;
+    color: #666;
+    font-weight: bold;
+}
+.hi{
+    font-size: 19px;
+    font-weight: bold;
+}
+.mainbox{
+    margin: 0 auto;
+    width: 1000px;
+    position: relative;
+    color: #666;
+    font-weight: bold;
+}
+.attractionTitle{
+    color: #448899;
+    font-weight: bold;
+}
+.attractionName{
+    font-weight: bold;
+}
+.bookingInfoBox{
+    position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
-.nullTop>div{
-    width: 1200px;
-    left: 1%;
+.imgBox{
+    width: 266px;
+    height: 200px;
+    overflow: hidden;
 }
-.category{
-    z-index: 99;
-    position: relative;
-    left: 1%;
+img{
+    height: 200px;
+    object-fit: cover;
+
 }
-.listCatagory{
-    background-color: #ffffff;
+.bookingInfo{
+    width: 266px;
+    height: 200px;
+    margin-left: 20px;
+}
+.bookingInfo>p>span{
+    font-weight: normal;
+}
+.deleteInfo{
     position: absolute;
-    margin-top: 20px;
-    padding: 10px;
-    width: 400px;
-    display: none;
-    grid-template-columns: repeat(3,1fr);
-    border-radius: 5px;
-    box-shadow: 0px 0px 20px #AABBCC;
+    right: 10px;
+    top: 0;
+    zoom: 1.2;
 }
-ul li{
-    list-style: none;
-    line-height: 33px;
+.deleteInfo :hover{
     cursor: pointer;
 }
-ul :hover{
+.hr{
+    margin: 50px auto;
+    width: 1200px;
+    border: 1px solid #E8E8E8;
+    background-color: #E8E8E8;
+}
+input{
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    height: 20px;
+}
+.bottom{
+    height: 100px;
+    width: 100%;
+}
+.total{
+    position: relative;
+    color: #666;
+    font-weight: bold;
+    right: 10px;
+    text-align: right;
+}
+button{
+    position: absolute;
     background-color: #448899;
     color: #ffffff;
-}
-.onWelcomePng{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.onWelcomePng>div{
-    color: #ffffff;
-    width: 1200px;
-    height: auto;
-    position: relative;
-    left: 1%;
-}
-#welcome{
-    height: 320px;
-    margin: 0 auto;
-    overflow: hidden;
-    position: relative;
- 
-}
-#welcome>img{
-    width: 100%;
-    overflow: hidden; 
-}
-
-/* searchBar */
-.categorySearch{
-    width: 500px; /*60px+400px*/
-    height: 30px;
-}
-.categorySearch>input[type=text] {
-    padding: 10px;
-    width: 80%;
-    font-size: 17px;
-    border: 1px solid grey;
-    float: left;
-    border-radius: 5px 0 0 5px;
-    background: #f1f1f1;
-    float: left;
-    cursor: pointer;
-
-}
-.categorySearch>button{
-    padding: 10px;
-    width: auto;
-    background: #448899;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none;
-    cursor: pointer;
-    border-radius: 0 5px 5px 0;
-}
-
-/* main */
-#main{
-    width: 1200px;
-    margin: 20px auto;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    /* justify-content: space-between;    */
-    /* justify-content: space-evenly; */
-    /* justify-content: space-around; */
-    gap: 30px;
-}
-.mainImageBox {
-    width: auto;
-    height: 197px;
-    overflow: hidden;
-    cursor: pointer;
-}
-.mainImageBox :hover{
-    opacity: 0.4;
-}
-.mainImage{
-    width: 100%;
-    height: auto;  
-}
-.name-background{
-    background-color:rgba(0,0,0,0.6);
-    height: 40px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 157px; /* 197px-40px */
-}
-.name{
-    color: #ffffff;
-    margin: 4%;
-}
-.mrt{
-    float: left;
-    margin: 4%;
-}
-.cat{
-    float: right;
-    margin: 4%;
-}
-
-.item{
-    border: 1px solid #ccc;
+    font-size: 19px;
+    width: 180px;
+    height: 33px;
+    border: none;
     border-radius: 5px;
-    /* width: 270px; */
-    overflow: hidden;
-    position: relative;
-
+    right: 10px;
+    margin: 20px auto;
 }
 footer{
     color: #ffffff;
     background-color: #757575;
     height: 104px;
-    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    bottom: 0;
 }
 
-
-@media (max-width:1200px){
+@media(max-width:1200px){
     #header{
         width: 100%;
     }
-    #welcome>img{
-        width: auto;
-        height: 320px;
+    .nav{
+        width: 80%;
     }
-    #main{
-        width: 90%;
-        height: auto;
-        grid-template-columns: repeat(2,1fr);
+    .mainbox{
+        width: 80%;
+
     }
-    
-    .mainImageBox{
-        height: 220px;
-    }
-    .name-background{
-        top: 180px;
-    }
-    footer{
-        width: 100%;
+    .hr{
+        width: 95%;
     }
 }
+@media(max-width:800px){
+    .nav{
+        width: 555px;
+    }
+    .mainbox{
+        width: 555px;
+    }
+    .deleteInfo{
+        top: auto;
+        bottom: 0;
+    }
 
+}
 @media(max-width:600px){
     .header-rightItem{
         margin-left: auto;
         line-height: 54px;
     }
-    #main{
-        grid-template-columns: repeat(1,1fr);
+    .nav{
+        width: 95%;
     }
-    .mainImageBox{
-        height: 235px;
+    .mainbox{
+        width: 95%;
     }
-    .name-background{
-        top: 195px;
+    .bookingInfoBox{
+        display: block;
     }
-    .categorySearch{
-        width: 90%;
+    .imgBox{
+        width: 100%;
     }
-    
+    .bookingInfo{
+        margin: 30px 0;
+    }
+    img{
+        width: 100%;
+        height: auto;
+    }
+    input{
+        width: 60%;
+    }
 }
+@media(max-width:500px){
 
-@media(max-width:360px){
-    #register{
-        width: 95%;
-    }
-    #login{
-        width: 95%;
-    }
 }
