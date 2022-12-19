@@ -300,8 +300,7 @@ def get_booking_info():
         if token:
             response=jwt.decode(token, app.secret_key, algorithms=["HS256"])
             email=response["email"]
-            cursor.execute("select webpage.id, webpage.name, webpage.address, webpage.images, booking.date, booking.time, booking.price from webpage join booking on webpage.id=booking.attractionid where booking.email=%s" ,
-             (email,))
+            cursor.execute("select webpage.id, webpage.name, webpage.address, webpage.images, BOOKING.DATE, BOOKING.TIME, BOOKING.PRICE from webpage join BOOKING on webpage.id=BOOKING.ATTRACTIONID where BOOKING.EMAIL=%s" ,(email,))
             booking=cursor.fetchone()
             if booking:
                 id=booking[0]
@@ -342,12 +341,18 @@ def new_booking():
         token=request.cookies.get("user")
         if token:
             response=jwt.decode(token, app.secret_key, algorithms=["HS256"])
+            email=response["email"]
+            attractionId=request.json["attractionId"]
+            date=request.json["date"]
+            time=request.json["time"]
+            price=request.json["price"]
+            cursor.execute("SELECT EMAIL FROM BOOKING WHERE EMAIL=%s", (email,))
+            booking=cursor.fetchone()
+            if booking:
+                cursor.execute("UPDATE BOOKING SET ATTRACTIONID=%s, DATE=%s, TIME=%s, PRICE=%s WHERE EMAIL=%s", (attractionId, date, time, price, email,))
+                connection_object.commit()
+                return {"ok":True}
             if request.method=="POST":
-                email=response["email"]
-                attractionId=request.json["attractionId"]
-                date=request.json["date"]
-                time=request.json["time"]
-                price=request.json["price"]
                 cursor.execute("INSERT INTO BOOKING(EMAIL, ATTRACTIONID, DATE, TIME, PRICE) VALUES (%s,%s,%s,%s,%s)", (email, attractionId, date, time, price))
                 connection_object.commit()
                 return {"ok":True}
