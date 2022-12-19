@@ -379,7 +379,6 @@ def del_booking():
             email=response["email"]
             cursor.execute("DELETE FROM BOOKING WHERE EMAIL=%s", (email,))
             connection_object.commit()
-            # return {"ok":email}, 200
             return {"ok":True}, 200
         else:
             return {
