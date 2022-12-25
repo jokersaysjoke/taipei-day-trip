@@ -146,6 +146,7 @@ function sendPrimeToServer(prime){
         console.log(data)
         if(data.data){
             number=data.data.number
+            deleteAPI()
             window.location.href=urls+'/thankyou'+"?number="+number;
         }
     })
