@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    background-color: #757575;
 }
 a{
     text-decoration: none;
@@ -153,141 +154,19 @@ a{
     justify-content: center;
     align-items: center;
 }
-/* 圖片+資訊 */
-.fakeNav{
+/* main */
+.main{
     background-color: #ffffff;
-    width: 100%;
+    color: #757575;
+    text-align: center;
+    padding: 20px;
 }
-.nav{
-    width: 1000px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    position: relative;
-    color: #666;
+.main>p{
     font-weight: bold;
-}
-.hi{
-    font-size: 19px;
-    font-weight: bold;
-}
-.mainbox{
-    margin: 0 auto;
-    width: 1000px;
-    position: relative;
-    color: #666;
-    font-weight: bold;
-}
-.attractionTitle{
-    color: #448899;
-    font-weight: bold;
-}
-.attractionName{
-    font-weight: bold;
-}
-.bookingInfoBox{
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-.imgBox{
-    width: 266px;
-    height: 200px;
-    overflow: hidden;
-}
-img{
-    height: 200px;
-    object-fit: cover;
 
 }
-.bookingInfo{
-    width: 277px;
-    height: 200px;
-    margin-left: 20px;
-}
-.bookingInfo>p>span{
-    font-weight: normal;
-}
-.deleteInfo{
-    position: absolute;
-    right: 10px;
-    top: 0;
-    zoom: 1.2;
-}
-.deleteInfo :hover{
-    cursor: pointer;
-}
-.hr{
-    margin: 50px auto;
-    width: 1200px;
-    border: 1px solid #E8E8E8;
-    background-color: #E8E8E8;
-}
-input{
-    border: 1px solid #E8E8E8;
-    border-radius: 5px;
-    height: 20px;
-}
-.bottom{
-    height: 100px;
-    width: 100%;
-}
-.total{
-    position: relative;
-    color: #666;
-    font-weight: bold;
-    right: 10px;
-    text-align: right;
-}
-button{
-    position: absolute;
-    background-color: #448899;
-    color: #ffffff;
-    font-size: 19px;
-    width: 180px;
-    height: 33px;
-    border: none;
-    border-radius: 5px;
-    right: 10px;
-    margin: 20px auto;
-    cursor: pointer;
-}
-/* TapPay */
-.tpfield {
-    height: 20px;
-    width: 300px;
-    margin: 5px 0;
-    padding: 5px;
-    border: 1px solid #E8E8E8;
-    border-radius: 5px;
-}
-.jumbotron {
-    text-align: center;
-}
-.text-left {
-    text-align: left;
-}
-.container {
-    max-width: 750px;
-}
-form {
-    padding: 40px;
-    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-}
-.tappay-field-focus {
-    border-color: #66afe9;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
-}
-.has-error .tappay-field-focus {
-    border-color: #843534;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
-}
-.has-success .tappay-field-focus {
-    border-color: #2b542c;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168;
+.orderNumber{
+    color: green;
 }
 /* footer */
 footer{
@@ -304,28 +183,6 @@ footer{
     #header{
         width: 100%;
     }
-    .nav{
-        width: 80%;
-    }
-    .mainbox{
-        width: 80%;
-
-    }
-    .hr{
-        width: 95%;
-    }
-}
-@media(max-width:800px){
-    .nav{
-        width: 555px;
-    }
-    .mainbox{
-        width: 555px;
-    }
-    .deleteInfo{
-        top: auto;
-        bottom: 0;
-    }
 
 }
 @media(max-width:600px){
@@ -333,29 +190,4 @@ footer{
         margin-left: auto;
         line-height: 54px;
     }
-    .nav{
-        width: 95%;
-    }
-    .mainbox{
-        width: 95%;
-    }
-    .bookingInfoBox{
-        display: block;
-    }
-    .imgBox{
-        width: 100%;
-    }
-    .bookingInfo{
-        margin: 30px 0;
-    }
-    img{
-        width: 100%;
-        height: auto;
-    }
-    input{
-        width: 60%;
-    }
-}
-@media(max-width:500px){
-
 }
