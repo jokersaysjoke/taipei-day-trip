@@ -95,9 +95,9 @@
             <div class="main">
                 <div class="mainbox">
                     <div>您的聯絡資訊</div>
-                    <p>聯絡姓名：<input type="text"></p>
-                    <p>連絡信箱：<input type="text"></p>
-                    <p>手機號碼：<input type="text"></p>
+                    <p>聯絡姓名：<input class="userName" type="text"></p>
+                    <p>連絡信箱：<input class="userEmail" type="text"></p>
+                    <p>手機號碼：<input class="userPhone" type="text"></p>
                     <p>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</p>
                 </div>
             </div>
@@ -106,16 +106,18 @@
             <div class="main">
                 <div class="mainbox">
                     <div>信用卡付款資訊</div>
-                    <p>卡片號碼：<input type="password"></p>
-                    <p>過期時間：<input type="month"></p>
-                    <p>驗證密碼：<input type="text"></p>
+                    <br>
+                    <span>卡片號碼：</span><div class="tpfield" id="card-number"></div>
+                    <span>過期時間：</span><div class="tpfield" id="card-expiration-date"></div>
+                    <span>驗證密碼：</span><div class="tpfield" id="card-ccv"></div>
                 </div>
-            </div>
+                </div>
+            
             <div class="hr"></div>
             <div class="mainbox">
                 <div class="bottom">
                     <div class="total">總價：新台幣&nbsp;<span class="attractionPrice"></span>&nbsp;元</div>
-                    <button type="submit">確認訂購並付款</button>
+                    <button type="submit" onclick="onSubmit();">確認訂購並付款</button>
                 </div>
             </div>
         </div>
@@ -124,5 +126,73 @@
         </footer>
         <script src="/static/user.js"></script>
         <script src="/static/booking.js"></script>
+        <script src="https://js.tappaysdk.com/tpdirect/v5.1.0"></script>
+        <script>
+        TPDirect.setupSDK(126874, 'app_ex1UhAce44wbJuVb533o2ZadAM2kOFxEbZ11TWXZylmk5J1QksUPS7vQ8kw6', 'sandbox')
+        // 以下提供必填 CCV 以及選填 CCV 的 Example
+        // 必填 CCV Example
+        var fields = {
+            number: {
+                // css selector
+                element: '#card-number',
+                placeholder: '**** **** **** ****'
+            },
+            expirationDate: {
+                // DOM object
+                element: document.getElementById('card-expiration-date'),
+                placeholder: 'MM / YY'
+            },
+            ccv: {
+                element: '#card-ccv',
+                placeholder: '後三碼'
+            }
+        }
+        TPDirect.card.setup({
+            fields: fields,
+            styles: {
+                // Style all elements
+                'input': {
+                    'color': 'gray'
+                },
+                // Styling ccv field
+                'input.ccv': {
+                    // 'font-size': '16px'
+                },
+                // Styling expiration-date field
+                'input.expiration-date': {
+                    // 'font-size': '16px'
+                },
+                // Styling card-number field
+                'input.card-number': {
+                    // 'font-size': '16px'
+                },
+                // style focus state
+                ':focus': {
+                    // 'color': 'black'
+                },
+                // style valid state
+                '.valid': {
+                    'color': 'green'
+                },
+                // style invalid state
+                '.invalid': {
+                    'color': 'red'
+                },
+                // Media queries
+                // Note that these apply to the iframe, not the root window.
+                '@media screen and (max-width: 400px)': {
+                    'input': {
+                        'color': 'orange'
+                    }
+                }
+            },
+            // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
+            isMaskCreditCardNumber: true,
+            maskCreditCardNumberRange: {
+                beginIndex: 6, 
+                endIndex: 11
+            }
+        })
+        </script>
     </body>
 </html>
