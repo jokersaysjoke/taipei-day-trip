@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html >
+<html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <title>台北一日遊</title>
-        <link rel="stylesheet" type="text/css" href="/static/css/attraction.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/account.css" />
         <link rel="stylesheet" type="text/css" href="/static/css/global.css" />
         <script src="https://kit.fontawesome.com/721f2dd150.js" crossorigin="anonymous"></script>
     </head>
@@ -58,53 +58,16 @@
         </div>
         <!-- 天黑 -->
         <div id="loginWindowBackground" onclick="closeRegister()"></div>
-        <!-- welcome -->
-        <div id="welcome">
-            <div class="welcome-left">
-                <a class="welcome-img-button-left" onclick="slideImg(-1)"><i class="fa-solid fa-chevron-left"></i></a>
-                <a class="welcome-img-button-right"onclick="slideImg(1)"><i class="fa-solid fa-chevron-right"></i></a>
-                <div class="welcome-img-bottom">
-                </div>
-                
-                <div class="welcome-imgbox">
-                </div>
-            </div>
-            <div class="welcome-right">
-                <h2 class="welcome-right-h2"></h2>
-                <p class="welcome-right-CatMrt"></p>
-                <div class="welcome-right-detail-background">
-                    <div class="welcome-right-detail">
-                        <p>訂購導覽行程</p>
-                        <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
-                        <p>選擇日期：<input class="reservationDate" placeholder="yyyy/mm/dd" type="date" style="border: none; width: 199px; height: 33px"></p>
-                        <p class="dateNull"></p>
-                        <p style="display: flex; align-items: center;" >
-                            選擇時間：
-                            <span><button class="amButton" ></button></span>
-                            &nbsp;上半天&nbsp;&nbsp;
-                            <span><button class="pmButton" ></button></span>
-                            &nbsp;下半天&nbsp;&nbsp;
-                        </p>
-                        <p class="timeNull"></p>
-                        <p>導覽費用：新台幣&nbsp;<span class="price">2000</span>&nbsp;元</p>
-                        <button type="submit" class="reservationButton" >開始預約行程</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="hr"></div>
-        <!-- article -->
-        <div id="article">
-            <p class="description"></p>
-            <h3>景點地址：</h3>
-            <p class="address"></p>
-            <h3>交通方式：</h3>
-            <p class="transport"></p>
-        </div>
+        <!-- mian -->
+        <p class="account-header">
+            <span id="account-header-user">我的資料</span>
+            <span id="account-header-order">歷史訂單</span>
+        </p>
+        <div class="account-main"></div>
         <footer id="footer">
             <div>COPYRIGHT © 2021 台北一日遊</div>
         </footer>
         <script src="/static/js/user.js"></script>
-        <script src="/static/js/attraction.js"></script>
+        <script src="/static/js/account.js"></script>
     </body>
 </html>

@@ -1,8 +1,5 @@
 const body=document.querySelector("body")
 const fakeBody=document.querySelector("#fakeBody")
-const nav=document.querySelector(".nav")
-const hi=document.querySelector(".hi")
-const noInfo=document.querySelector(".noInfo")
 const footer=document.querySelector("footer")
 const attractionName=document.querySelector(".attractionName")
 const attractionDate=document.querySelector(".attractionDate")
@@ -14,29 +11,22 @@ const userName=document.querySelector(".userName")
 const userEmail=document.querySelector(".userEmail")
 const userPhone=document.querySelector(".userPhone")
 const cardNumber=document.querySelector("#card-number")
-const cardExpirationDate=document.querySelector("#card-expiration-date")
-const cardCCV=document.querySelector("#card-ccv")
 let attractionID="";
 let ampm="";
 // 刪除預設html
 function delBookingInfo(){
-    fakeBody.innerHTML="";
-    noInfo.innerHTML="目前沒有任何待預定的行程";
-    body.style.backgroundColor="#757575"
+    const noInfo=document.querySelector(".noInfo")
+    fakeBody.innerHTML=""
+    noInfo.textContent="目前沒有任何待預定的行程";
+    body.style.backgroundColor="#757575";
 };
-// 取得API資訊
-function fetchBookingInfoAPI(){
-    // let urls="http://127.0.0.1:3000";
-    let urls="http://13.112.252.173:3000";
-
-    fetch(urls+"/api/booking")
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
+// fetch booking API
+async function fetchBookingInfoAPI(){
+    const response=await fetch(`/api/booking`);
+    const data=await response.json();
+    if(data.data){
         let time="";
-        console.log(data);
-        if(data.data){
+        fakeBody.style.display="block"
             if(data.data.time=="morning"){
                 ampm="morning"
                 time="早上 9 點到下午 4 點"
@@ -45,44 +35,30 @@ function fetchBookingInfoAPI(){
                 time="下午 4 點到晚上 9 點"}
             attractionID=data.data.attraction.id
             imgJPG.setAttribute('src', data.data.attraction.image);
-            attractionName.innerText=data.data.attraction.name;
-            attractionDate.innerText=data.data.date;
-            attractionTime.innerText=time;
-            attractionPrice[0].innerText=data.data.price;
-            attractionPrice[1].innerText=data.data.price;
-            attractionAddress.innerText=data.data.attraction.address;
-
-        }else{delBookingInfo()}
-    })
+            attractionName.textContent=data.data.attraction.name;
+            attractionDate.textContent=data.data.date;
+            attractionTime.textContent=time;
+            attractionPrice[0].textContent=data.data.price;
+            attractionPrice[1].textContent=data.data.price;
+            attractionAddress.textContent=data.data.attraction.address;
+    }else{delBookingInfo()}
 };
 fetchBookingInfoAPI();
 
-// 刪除API資訊
-function deleteAPI(){
-    // let urls="http://127.0.0.1:3000";
-    let urls="http://13.112.252.173:3000";
-
-    fetch(urls+"/api/booking", {
-        method:"DELETE"
-    })
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        console.log(data);
-        if(data.ok){
-            delBookingInfo();
-        }
-    })
+// delete booking info API
+async function deleteAPI(){
+    const response=await fetch(`/api/booking`, {method:"DELETE"});
+    const data=await response.json();
+    if(data.ok) return delBookingInfo();
 };
 
 
 function onSubmit() {
     // 讓 button click 之後觸發 getPrime 方法
-    event.preventDefault()
+    event.preventDefault();
 
     // 取得 TapPay Fields 的 status
-    const tappayStatus = TPDirect.card.getTappayFieldsStatus()
+    const tappayStatus = TPDirect.card.getTappayFieldsStatus();
 
     // 確認是否可以 getPrime
     if (tappayStatus.canGetPrime === false) {
@@ -109,26 +85,23 @@ function onSubmit() {
     })
 };
 
-function sendPrimeToServer(prime){
-    // let urls="http://127.0.0.1:3000";
-    let urls="http://13.112.252.173:3000";
-
-    fetch(urls+"/api/orders",{
+async function sendPrimeToServer(prime){
+    const response=await fetch(`/api/orders`,{
         method:"POST",
         body:JSON.stringify({
             "prime": prime,
             "order":{
-                "price":attractionPrice[1].innerText,
+                "price":attractionPrice[1].textContent,
                 "trip":{
                     "attraction":{
                         "id": attractionID,
-                        "name": attractionName.innerText,
-                        "address": attractionAddress.innerText,
+                        "name": attractionName.textContent,
+                        "address": attractionAddress.textContent,
                         "image": imgJPG.src
                     }
 
                 },
-                "date": attractionDate.innerText,
+                "date": attractionDate.textContent,
                 "time": ampm
             },
             "contact":{
@@ -139,16 +112,11 @@ function sendPrimeToServer(prime){
         }),
         headers: new Headers({"Content-type":"application/json"})
     })
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        console.log(data)
-        if(data.data){
-            number=data.data.number
-            deleteAPI()
-            window.location.href=urls+'/thankyou'+"?number="+number;
-        }
-    })
+    const data=await response.json();
+    if(data.data){
+        number=data.data.number
+        deleteAPI()
+        window.location.href=`/thankyou?number=${number}`;
+    }
 };
 

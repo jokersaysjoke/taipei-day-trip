@@ -1,168 +1,16 @@
-body{
-    margin: 0;
-}
 a{
     text-decoration: none;
 }
 button{
     cursor: pointer;
 }
-#headBox{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 99;
-    background-color: #ffffff;
-}
-#header{
-    background-color: #ffffff;
-    width: 1200px;
-    height: 54px;
-    display: flex;
-    margin: 0 auto;
-    
-}
-.header-left{
-    color: #448899;
-    font-size: 30px;
-    font-weight: bold;
-    flex: 50%;
-    margin: 1%;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-.header-right{
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    margin: 1%;
-    flex: 50%;
-    color: #666;
-}
-.header-rightItem{
-    margin-left: 20px;
-    cursor: pointer;
-}
-.header-rightItem>a{
-    color: #666;
-}
-.fakeHeadBox{
-    height: 54px;
-}
-.signMessage{
-    font-weight: bold;
-}
-.registerMessage{
-    font-weight: bold;
-}
-/* register */
-#login{
-    background-color: #ffffff;
-    width: 340px;
-    /* height: 275px; */
-    height: auto;
-    text-align: center;
-    position: fixed ;
-    display: none;
-    left: 0;
-    right: 0;
-    top: 80px;
-    margin: 0 auto;
-    border-radius: 5px;
-    border: none;
-    overflow: hidden;
-    z-index: 99;
-}
-#register{
-    background-color: #ffffff;
-    width: 340px;
-    /* height: 275px; */
-    height: auto;
-    text-align: center;
-    position: fixed ;
-    display: none;
-    left: 0;
-    right: 0;
-    top: 80px;
-    margin: 0 auto;
-    border-radius: 5px;
-    border: none;
-    overflow: hidden;
-    z-index: 99;
-}
-#loginWindowBackground{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 100%;
-    background: rgba(0,0,0,0.6);
-    z-index: 88;
-    cursor: pointer;
-    display: none;
-}
-.registerCloser{
-    position: absolute;
-    top: 20px;
-    right: 10px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
-.registerBackground{
-    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
-    width: 100%;
-    height: 10px;
-}
-.registerTitle{
-    color: #666666;
-    font-size: 24px;
-    font-weight: bold;
-    height: 44px;
-    margin-top: 10px;
-}
-.registerBox{
-    width: 95%;
-    margin: 0 auto;
-}
-.messageOK{
-    color: green;
-}
-.registerBoxEmail, .registerBoxPass, .loginButton, .registerButton, .newUserName, .newEmail, .newPassword{
-    max-width: 310px;
-    width: 90%;
-    height: 22px;
-    border-radius: 5px;
-    border: 1px solid #CCCCCC;
-    margin: 5px auto;
-    padding: 10px;
-}
-.loginButton ,.registerButton{
-    background-color: #448899;
-    color: #ffffff;
-    max-width: 312px; /*310+1border+1border*/
-    width: 100%;
-    font-size: 17px;
-    height: 42px;
-    padding: none;
-    border: none;
-    cursor: pointer;
-}
-.registerFooter{
-    height: 44px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 /*welcome*/
 #welcome{
-    width: 1200px;
+    max-width: 1200px;
     height: 406px;
     margin: 10px auto;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
 }
 .welcome-left{
@@ -172,6 +20,9 @@ button{
     border-radius: 5px;
     overflow: hidden;
     position: relative;
+}
+.welcome-right{
+    width: 50%;
 }
 .welcome-imgbox{
     width: auto;
@@ -225,7 +76,6 @@ input{
     cursor: pointer;
 }
 .welcome-img-bottom{
-    /* background-color: rgba(128, 128, 128, 0.8); */
     position: absolute;
     display: flex;
     justify-content: center;
@@ -257,7 +107,7 @@ input{
 }
 .welcome-right-detail-background{
     background-color: #E8E8E8;
-    width: 600px;
+    width: 100%;
     height: 100%;
     border-radius: 5px;
 }
@@ -302,15 +152,18 @@ input{
 }
 .hr{
     margin: 50px auto;
-    width: 1200px;
+    max-width: 1200px;
+    width: 95%;
     border: 1px solid #E8E8E8;
     background-color: #E8E8E8;
 }
 /*article*/
 #article{
     color: #666666;
-    width: 1200px;
+    max-width: 1200px;
+    width: 95%;
     margin: 50px auto;
+    line-height: 33px;
 }
 footer{
     color: #ffffff;
@@ -321,32 +174,20 @@ footer{
     align-items: center;
 }
 @media(max-width:1200px){
-    #header{
-        width: 100%;
-    }
     #welcome{
-        width: 90%;
-        justify-content: center;
+        justify-content: space-between;
+        width: 95%;
     }
     .welcome-left{
-        width: auto;
+        width: 50%;
     }
     .welcome-right{
-        width: auto;
-    }
-    .welcome-right-detail-background{
-        margin: 0 auto;
-        width: 100%;
-    }
-    #article{
-        width: 81%; /*90%的90%*/
-        margin: 0 auto;
+        width: 45%;
     }
 }
 
 
-@media(max-width:800px){
-    
+@media(max-width:750px){
     #welcome{
         display: block;
         height: auto;
@@ -378,10 +219,6 @@ footer{
     }
 }
 @media(max-width:600px){
-    .header-rightItem{
-        margin-left: auto;
-        line-height: 54px;
-    }
     #welcome{
         width: 100%;
     }

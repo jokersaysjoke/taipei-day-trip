@@ -4,24 +4,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <title>台北一日遊</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='thankyou.css')}}" />
+        <link rel="stylesheet" type="text/css" href="/static/css/thankyou.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/global.css" />
         <script src="https://kit.fontawesome.com/721f2dd150.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div id="headBox">
-            <div id="header">
-                <div class="header-left" >
-                    <a href="http://127.0.0.1:3000/" style="color: #448899; text-decoration: none;">台北一日遊</a>
-                    <!-- <a href="http://13.112.252.173:3000/" style="color: #448899; text-decoration: none;">台北一日遊</a> -->
-                </div>
-                <div class="header-right">
-                    <div class="header-rightItem">預定行程</div>
-                    <!-- <div class="header-rightItem">登入/註冊</div> -->
-                    <div id="headerRightItem" class="header-rightItem" style="cursor: pointer" ></div>
-                </div>
+        <!-- header -->
+        <div class="headerBackground"></div>
+        <div id="header">
+            <div class="header-left">
+                <a href="/" style="color: #448899;text-decoration: none; ">台北一日遊</a>
+            </div>
+            <div class="header-right">
+                <div class="header-rightItem">預定行程</div>
+                <div id="headerRightItem" class="header-rightItem" style="cursor: pointer" ></div>
             </div>
         </div>
-        <div class="fakeHeadBox"></div>
+        <div id="fakeHeader"></div>
         <!-- 登入 -->
         <div id="login">
             <div class="registerBackground"></div>
@@ -49,7 +48,6 @@
                 <input class="newUserName" placeholder="輸入姓名" name="name" type="text" required>
                 <input class="newEmail" placeholder="輸入電子信箱" name="email" type="text" required>
                 <input class="newPassword" placeholder="輸入密碼" name="password" type="password" required>
-                <!-- <button class="loginButton">註冊新帳戶</button> -->
             </form>
             <input class="loginButton" type="submit" value="註冊新帳戶" onclick="signUp()">
             <div class="registerMessage"></div>
@@ -72,6 +70,6 @@
         <footer id="footer">
             <div>COPYRIGHT © 2021 台北一日遊</div>
         </footer>
-        <script src="/static/user.js"></script>
+        <script src="/static/js/user.js"></script>
     </body>
 </html>

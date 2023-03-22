@@ -1,5 +1,5 @@
 // const urls="http://127.0.0.1:3000";
-let urls="http://13.112.252.173:3000";
+// let urls="http://13.112.252.173:3000";
 const newUserName=document.querySelector(".newUserName");
 const newEmail=document.querySelector(".newEmail");
 const newPassword=document.querySelector(".newPassword");
@@ -12,7 +12,7 @@ function signUp(){
         registerMessage.innerHTML="不可以空白";
     }
     else{
-        fetch(urls+"/api/user",{
+        fetch(`/api/user`,{
             method:"POST",
             body:JSON.stringify({
                 name:newUserName.value,
@@ -38,10 +38,11 @@ function signUp(){
     }
 };
 // 登入
-const registerBoxEmail=document.querySelector(".registerBoxEmail")
-const registerBoxPass=document.querySelector(".registerBoxPass")
+const registerBoxEmail=document.querySelector(".registerBoxEmail");
+const registerBoxPass=document.querySelector(".registerBoxPass");
+
 function singIn(){
-    fetch(urls+"/api/user/auth",{
+    fetch(`/api/user/auth`,{
         method:"PUT",
         body:JSON.stringify({
             email:registerBoxEmail.value,
@@ -70,7 +71,7 @@ function singIn(){
 //登出
 const headerRightItem=document.querySelector("#headerRightItem")
 function logOut(){
-    fetch(urls+"/api/user/auth",{
+    fetch("/api/user/auth",{
         method:"DELETE"
     })
     .then(function(response){
@@ -87,7 +88,7 @@ function logOut(){
 const reservation=document.querySelector(".header-rightItem")
 // 會員中
 function member(){
-    fetch(urls+"/api/user/auth")
+    fetch(`/api/user/auth`)
     .then(function(response){
         return response.json();
     })
@@ -96,7 +97,7 @@ function member(){
             //已登入
             headerRightItem.innerHTML="登出系統";
             headerRightItem.addEventListener('click',logOut);
-            reservation.innerHTML='<a href='+urls+'/booking>預定行程</a>';
+            reservation.innerHTML='<a href=/booking>預定行程</a>';
         }
         else{
             //未登入
@@ -115,6 +116,7 @@ const registerWindowBackground=document.querySelector("#loginWindowBackground");
 function openLogin(){
     loginWindow.style.display="block";
     registerWindowBackground.style.display="block";
+    registerBoxEmail.focus();
 };
 
 const registerCloser=document.querySelector(".registerCloser");
@@ -124,6 +126,7 @@ function closeRegister(){
 function register(){
     registerWindow.style.display="block";
     loginWindow.style.display="none";
+    newUserName.focus();
 };
 function login(){
     loginWindow.style.display="block";

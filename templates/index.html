@@ -4,21 +4,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <title>台北一日遊</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css')}}" />
+        <link rel="stylesheet" type="text/css" href="/static/css/index.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/global.css" />
         <script src="https://kit.fontawesome.com/721f2dd150.js" crossorigin="anonymous"></script>
     </head>
-    <!-- onClick="location.reload();" -->
     <body>
+        <!-- header -->
+        <div class="headerBackground"></div>
         <div id="header">
             <div class="header-left">
-                <a href="http://127.0.0.1:3000/" style="color: #448899;text-decoration: none; ">台北一日遊</a>
-                <!-- <a href="http://13.112.252.173:3000/" style="color: #448899;text-decoration: none; ">台北一日遊</a> -->
+                <a href="/" style="color: #448899;text-decoration: none; ">台北一日遊</a>
             </div>
             <div class="header-right">
                 <div class="header-rightItem">預定行程</div>
                 <div id="headerRightItem" class="header-rightItem" style="cursor: pointer" ></div>
             </div>
         </div>
+        <div id="fakeHeader"></div>
         <!-- 登入 -->
         <div id="login">
             <div class="registerBackground"></div>
@@ -46,7 +48,6 @@
                 <input class="newUserName" placeholder="輸入姓名" name="name" type="text" required>
                 <input class="newEmail" placeholder="輸入電子信箱" name="email" type="text" required>
                 <input class="newPassword" placeholder="輸入密碼" name="password" type="password" required>
-                <!-- <button class="loginButton">註冊新帳戶</button> -->
             </form>
             <input class="loginButton" type="submit" value="註冊新帳戶" onclick="signUp()">
             <div class="registerMessage"></div>
@@ -71,7 +72,6 @@
                         <input id="selectCatagoryList" type="text" placeholder="輸入景點名稱查詢"   >
                     </form>
                     <ul id="listCatagory" class="listCatagory" ></ul>
-                    
                 </div>
             </div>
         </div>
@@ -79,15 +79,14 @@
         <div id="welcome">
             <div class="onWelcomePng">
             </div>
-            <img src="static/welcome.png" >
+            <img src="static/img/welcome.png" >
         </div>
- 
         <!-- main -->
         <div id="main"></div>
         <footer id="footer">
             <div>COPYRIGHT © 2021 台北一日遊</div>
         </footer>
-        <script src="/static/mainAJAX.js"></script>
-        <script src="/static/user.js"></script>
+        <script src="/static/js/user.js"></script>
+        <script src="/static/js/mainAJAX.js"></script>
     </body>
 </html>
