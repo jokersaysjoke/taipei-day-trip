@@ -1,6 +1,6 @@
 # [taipei-day-trip-website](http://13.112.252.173:3000/)  
-E-Commerce Tourism Website  
-
+*E-Commerce Tourism Website*
+## Demo  
 Here is website link => <http://13.112.252.173:3000/>  
 Test account:
 - User : test1@test.com  
@@ -11,7 +11,7 @@ Test payment information:
 - Date : 01/23  
 - CVV : 123  
 
-### Skills  
+## Skills  
 - Server Frameword: Flask
 - Deployment: AWS EC2 (Linux Ubuntu)
 - API Design: RESTful API
@@ -20,4 +20,8 @@ Test payment information:
 - Infinite scrolling
 - Authentication: JWT
 - Shopping Cart System
-- UI Features: RWD, Infinite Scroll Loading and Image Carousel
+- UI Features: RWD, Infinite Scroll Loading and Image Carousel  
+
+## Contract
+Chun Yi Chen  
+Email: jokersaysjoke@gmail.com
