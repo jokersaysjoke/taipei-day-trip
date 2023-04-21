@@ -132,3 +132,32 @@ function login(){
     
 };
 
+registerBoxEmail.addEventListener('keydown', (event)=>{
+    if (event.keyCode === 13) {
+        singIn();
+    }
+});
+
+registerBoxPass.addEventListener('keydown', (event)=>{
+    if (event.keyCode === 13) {
+        singIn();
+    }
+});
+
+newUserName.addEventListener('keydown', (event)=>{
+    if (event.keyCode === 13) {
+        signUp();
+    }
+});
+
+newEmail.addEventListener('keydown', (event)=>{
+    if (event.keyCode === 13) {
+        signUp();
+    }
+});
+
+newPassword.addEventListener('keydown', (event)=>{
+    if (event.keyCode === 13) {
+        signUp();
+    }
+});

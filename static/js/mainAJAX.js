@@ -127,7 +127,7 @@ function searchCategory(){
     keyword=selectCatagoryList.value
     fetchAttractionsAPI()
 };
-document.addEventListener('keydown', (event)=>{
+selectCatagoryList.addEventListener('keydown', (event)=>{
     if (event.keyCode === 13) {
         searchCategory();
     }
