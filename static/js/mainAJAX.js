@@ -3,8 +3,9 @@ let page=0;
 let keyword=null;
 let isLoading=false;
 const main=document.querySelector("#main")
-const selectCatagoryList=document.querySelector("#selectCatagoryList");
 const listCatagory=document.querySelector("#listCatagory");
+const selectCatagoryList=document.querySelector("#selectCatagoryList");
+selectCatagoryList.focus();
 
 // 載入網頁立刻 fetch API
 window.onload = fetchAttractionsAPI;
@@ -126,3 +127,8 @@ function searchCategory(){
     keyword=selectCatagoryList.value
     fetchAttractionsAPI()
 };
+document.addEventListener('keydown', (event)=>{
+    if (event.keyCode === 13) {
+        searchCategory();
+    }
+})
