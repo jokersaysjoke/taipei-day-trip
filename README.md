@@ -8,7 +8,7 @@ Test account:
 
 Test payment information:
 - Credit Card : 4242-4242-4242-4242  
-- Date : 01/23  
+- Date : 12/34  
 - CVV : 123  
 
 ## Skills  
