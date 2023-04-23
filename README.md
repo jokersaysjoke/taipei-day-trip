@@ -3,7 +3,7 @@
 ## Demo  
 Here is website link => <http://13.112.252.173:3000/>  
 Test account:
-- User : test1@test.com  
+- User : `test1@test.com`
 - Password : 123  
 
 Test payment information:
