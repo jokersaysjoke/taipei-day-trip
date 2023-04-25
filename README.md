@@ -39,6 +39,11 @@ TapPay test:
 <img src='https://user-images.githubusercontent.com/110945189/234182610-c7fe238f-a937-47cf-8924-bed0ef1ac264.png' width='600px'>
 
 ## Backend Technique
+#### Key Points
+- MVC pattern
+- JWT authentication
+- Third normal form database
+
 #### Web Server Framework
 - Python Flask
 
