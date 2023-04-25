@@ -6,7 +6,7 @@ Test account:
 - User : `test1@test.com`
 - Password : `123`
 
-Test payment information:
+TapPay test:
 - Credit Card : `4242-4242-4242-4242`
 - Date : `12/34`
 - CVV : `123`
