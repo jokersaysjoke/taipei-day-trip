@@ -4,14 +4,16 @@
 Here is website link => <http://13.112.252.173:3000/>  
 Test account:
 - User : `test1@test.com`
-- Password : 123  
+- Password : `123`
 
 Test payment information:
-- Credit Card : 4242-4242-4242-4242  
-- Date : 12/34  
-- CVV : 123
+- Credit Card : `4242-4242-4242-4242`
+- Date : `12/34`
+- CVV : `123`
 
 ## Features
+- Pure HTML / CSS / JavaScript (no Boostrap, JQuery...)
+
 - Infinite Scroll
 
 <img src='https://user-images.githubusercontent.com/110945189/234104040-03970cd5-33bf-4a05-8b6a-3006af5041d5.gif' width="600px">
@@ -32,6 +34,9 @@ Test payment information:
 
 <img src='https://user-images.githubusercontent.com/110945189/234117289-536dd4e3-c07c-442d-b7c8-1c8546dfcf82.gif' width='600px'>
 
+## System Design
+
+<img src='https://user-images.githubusercontent.com/110945189/234182610-c7fe238f-a937-47cf-8924-bed0ef1ac264.png' width='600px'>
 
 ## Backend Technique
 #### Web Server Framework
@@ -57,5 +62,5 @@ Test payment information:
 - [API Doc](https://app.swaggerhub.com/apis-docs/padax/taipei-day-trip/1.1.0)
 
 ## Contract
-- Chen Chun-Yi
+- `Chen, Chun-Yi`
 - Email: `jokersaysjoke@gmail.com`
