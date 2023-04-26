@@ -67,5 +67,5 @@ TapPay test:
 - [API Doc](https://app.swaggerhub.com/apis-docs/padax/taipei-day-trip/1.1.0)
 
 ## Contact
-- `Chen, Chun-Yi`
+- Author: `Chen, Chun-Yi`
 - Email: `jokersaysjoke@gmail.com`
