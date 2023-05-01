@@ -63,4 +63,4 @@ Test payment information:
 
 ## Contact
 - Author: `Chen, Chun-Yi`
-- Email: `jokersaysjoke@gmail.com`
+- Email: `chun.yii.chen@gmail.com`
