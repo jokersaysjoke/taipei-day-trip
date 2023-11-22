@@ -60,4 +60,4 @@ def user_page():
     else:
         return redirect("/")
 
-app.run(port=3000)
+app.run('0.0.0.0', port=3000)

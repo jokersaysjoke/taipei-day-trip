@@ -1,7 +1,7 @@
-# [Taipei-Day-Trip](http://13.112.252.173:3000/)  
+# [Taipei-Day-Trip](http://57.180.253.178:3000/)  
 *"Taipei-Day-Trip" is a e-commerce tourism website that offers unique Taipei attractions, allowing customers to search for their preferences and book a one-day travel itinerary in Taipei."*
 ## Demo  
-Here is website link => <http://13.112.252.173:3000/>  
+Here is website link => <http://57.180.253.178:3000/>  
 Test account:
 - User : `test1@test.com`
 - Password : `123`
